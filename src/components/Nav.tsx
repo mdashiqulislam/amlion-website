@@ -53,7 +53,7 @@ export function FloatNav() {
           <a key={l.href} className="navlink" href={l.href}><Roll>{l.label}</Roll></a>
         ))}
       </div>
-      <a className="btn btn-lime" href="#contact" style={{ paddingRight: 18 }}><Roll>Request a quote</Roll></a>
+      <a className="btn btn-lime" href="#where-to-buy" style={{ paddingRight: 18 }}><Roll>Find a shop</Roll></a>
     </nav>
   );
 }

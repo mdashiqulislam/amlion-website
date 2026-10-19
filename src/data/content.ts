@@ -5,27 +5,6 @@ export const NAV_LINKS = [
   { href: "#contact", label: "Contact us" },
 ] as const;
 
-export const CERT_CHIPS = [
-  { label: "Halal · JAKIM", halal: true },
-  { label: "ISO 9001:2015" },
-  { label: "GMP" },
-  { label: "HACCP" },
-  { label: "BRC" },
-  { label: "BSCI" },
-  { label: "Kosher" },
-] as const;
-
-export type Cert = { code: string; sub: string; color: string; title: string; text: string };
-
-export const CERTS: Cert[] = [
-  { code: "ISO", sub: "9001:2015", color: "#1D6BDC", title: "ISO 9001:2015 quality management", text: "Shows our quality system is effective and productive, cutting waste while delivering on time and at the highest quality." },
-  { code: "HACCP", sub: "FOOD SAFETY", color: "#0E9384", title: "Hazard Analysis Critical Control Point", text: "A standard certification for food manufacturers. Our process was strong enough to earn it for oral care production." },
-  { code: "GMP", sub: "MOH MALAYSIA", color: "#4B4FD8", title: "Good Manufacturing Practices", text: "We were among the first manufacturers awarded GMP, before Malaysia's Ministry of Health made it mandatory." },
-  { code: "BRC", sub: "GLOBAL STD", color: "#0A2240", title: "British Retail Consortium", text: "Recognises AmLion as a preferred manufacturing supplier for private-label brands in the British retail market." },
-  { code: "BSCI", sub: "SOCIAL", color: "#3A4859", title: "Business Social Compliance Initiative", text: "A supply-chain system that drives social compliance and better working conditions in the factories behind your products." },
-  { code: "K", sub: "KOSHER", color: "#8A5A00", title: "Kosher certification", text: "Confirms our products follow kosher food laws, opening more retail markets for your brand." },
-];
-
 export type Country = { name: string; code: string; lat: number; lon: number };
 
 export const HQ = { lat: 3.1, lon: 101.6 };
@@ -97,8 +76,6 @@ export const BELT_ITEMS = [
   { sym: "i-tube", style: "--t1:#12805C" },
   { sym: "i-pump", style: "--b1:#FFFFFF;--b2:#1C9BD7;--b3:#DDEEFF" },
 ];
-
-export const PRODUCT_TYPES = ["Toothpaste", "Mouthwash", "Shampoo & body wash", "Lotion & cream", "Gift sets", "Samples & catalogue"];
 
 export const CONTACT = {
   phone: "+603-6156 5810",

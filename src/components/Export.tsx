@@ -47,7 +47,7 @@ function MapCard() {
             <svg viewBox="0 0 10 6"><rect width="10" height="6" fill="#006A4E" /><circle cx="4.5" cy="3" r="2" fill="#F42A41" /></svg>
           </span>
           <b>Bangladesh</b>
-          <span>An active export market. We already ship finished products from Selangor to brands in Bangladesh.</span>
+          <span>Now arriving. AmLion is reaching cosmetic shops and super shops across Bangladesh.</span>
         </div>
       </div>
 
@@ -79,14 +79,6 @@ function MapCard() {
 
       <div className="map-tip" style={tip ? { left: tip.x, top: tip.y, opacity: 1 } : undefined}>{tip?.name}</div>
 
-      <div className="chips" onPointerOver={(e) => { const c = (e.target as Element).closest<HTMLElement>(".cchip"); if (c) show(c.dataset.c ?? null); }}
-        onPointerOut={(e) => { if ((e.target as Element).closest(".cchip")) show(null); }}>
-        {COUNTRIES.map((c) => (
-          <span key={c.code} data-c={c.code} className={`cchip${c.code === "BD" ? " bd" : ""}${active === c.code && c.code !== "BD" ? " on" : ""}`}>
-            <i>{c.code}</i>{c.name}
-          </span>
-        ))}
-      </div>
     </div>
   );
 }
@@ -97,19 +89,14 @@ export function ExportMarket() {
       <div className="wrap">
         <div className="sec-head split reveal">
           <div style={{ display: "grid", gap: 18 }}>
-            <Label>Export market</Label>
-            <h2 className="h2" style={{ maxWidth: "13em" }}>Made in Malaysia. <span className="soft">On shelves in 30+ countries.</span></h2>
+            <Label>Trusted worldwide</Label>
+            <h2 className="h2" style={{ maxWidth: "13em" }}>Made in Malaysia. <span className="soft">Trusted in 30+ countries.</span></h2>
           </div>
-          <p className="lede">We have a presence in more than 30 countries across 5 continents and have produced oral and personal care products for almost 80 brands.</p>
+          <p className="lede">AmLion products are used in more than 30 countries across 5 continents. Bangladesh is our newest home.</p>
         </div>
 
         <div className="export-grid">
           <MapCard />
-          <div className="export-stats">
-            <div className="tile reveal"><div className="stat"><CountUp to={30} /><small>+</small></div><p>Export countries</p></div>
-            <div className="tile reveal"><div className="stat"><CountUp to={5} /></div><p>Continents</p></div>
-            <div className="tile reveal"><div className="stat">~<CountUp to={80} /></div><p>Brands produced for</p></div>
-          </div>
         </div>
       </div>
     </section>

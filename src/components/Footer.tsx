@@ -8,9 +8,9 @@ export function Footer() {
         <div className="fgrid">
           <div style={{ display: "grid", gap: 16, alignContent: "start" }}>
             <Logo />
-            <p>Halal-certified OEM and private-label manufacturer of toothpaste, oral care and personal care products.</p>
+            <p>Malaysian toothpaste and personal care, Halal certified, now in cosmetic shops and super shops across Bangladesh.</p>
             <a className="btn btn-lime" href="#contact" style={{ justifySelf: "start" }}>
-              <Roll>Request a quote</Roll><span className="arrow"><Icon id="i-arrow" /></span>
+              <Roll>Ask a question</Roll><span className="arrow"><Icon id="i-arrow" /></span>
             </a>
           </div>
           <div>
@@ -33,7 +33,7 @@ export function Footer() {
         <div className="wordmark" aria-hidden="true">AmLion</div>
         <div className="fbottom">
           <span>© {new Date().getFullYear()} AmLion Group Sdn Bhd. All rights reserved.</span>
-          <span><a href="#about">About</a> · <a href="#accreditations">Certifications</a> · <a href="#export">Export</a> · <a href="#news">News</a></span>
+          <span><a href="#about">About</a> · <a href="#products">Products</a> · <a href="#trust">Trust</a> · <a href="#faq">FAQ</a></span>
         </div>
       </div>
     </footer>
