@@ -1,25 +1,18 @@
-import Image from "next/image";
 import type { CSSProperties } from "react";
 import { HeroNav } from "./Nav";
+import { HeroVideo } from "./HeroVideo";
 import { Icon, Roll } from "./ui";
 
 const delay = (d: string) => ({ "--d": d }) as CSSProperties;
 
 /**
- * Hero from the Figma frame "Hero Section" (1440 x 1237): a 1408 x 1205 photo card
- * inset 16px, with the nav on top, a centred text block and the product shot below.
+ * Hero from the Figma frame "Hero Section" (1440 x 1237): a 1408 x 1205 card with a
+ * looping background video, the nav on top, a centred text block, and a dark fade for readability.
  */
 export function Hero() {
   return (
     <header className="hero2" id="top">
-      <Image
-        className="hero2-bg"
-        src="/hero/hero-bg.jpg"
-        alt="Toothpaste, body wash, olive oil and perfume bottles on a stone podium among white flowers and olives"
-        fill
-        priority
-        sizes="100vw"
-      />
+      <HeroVideo />
       <div className="hero2-shade" aria-hidden="true" />
 
       <HeroNav />
