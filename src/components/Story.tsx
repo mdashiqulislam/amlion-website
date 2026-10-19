@@ -108,10 +108,9 @@ export function Plant() {
         </div>
         <div className="line" aria-hidden="true">
           <svg className="machine" viewBox="0 0 600 340" preserveAspectRatio="xMidYMax meet">
-            <rect x="250" y="0" width="120" height="70" rx="10" fill="#1E3B60" />
-            <rect x="262" y="12" width="96" height="10" rx="5" fill="#2E5683" />
-            <circle cx="342" cy="44" r="6" fill="#D6FD70" />
-            <circle cx="322" cy="44" r="6" fill="#1C9BD7" />
+            {/* Glass head panel with the AML logo (Figma: white at 10%, soft light rim) */}
+            <rect x="250.5" y="0.5" width="119" height="69" rx="10" fill="rgba(255,255,255,.1)" stroke="rgba(255,255,255,.3)" />
+            <image href="/factory/logo-mark.svg" x="269.4" y="19.9" width="81.56" height="31.21" />
             <g className="nozzle">
               <rect x="296" y="70" width="28" height="56" rx="6" fill="#C9D6E6" />
               <path d="M302 126h16l-4 14h-8z" fill="#9FB1C8" />

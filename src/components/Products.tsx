@@ -1,11 +1,12 @@
 "use client";
 
+import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { PRODUCTS } from "@/data/consumer";
+import { CATEGORIES, PRODUCTS } from "@/data/consumer";
 import type { Product } from "@/data/consumer";
-import { Icon, Label, Roll, Sym } from "./ui";
+import { Label } from "./ui";
 
-const GROUPS = ["All", "Oral care", "Hair care", "Body & skin"] as const;
+const TABS = ["All", ...CATEGORIES] as const;
 
 function Drawer({ product, onClose }: { product: Product; onClose: () => void }) {
   const closeRef = useRef<HTMLButtonElement>(null);
@@ -25,36 +26,36 @@ function Drawer({ product, onClose }: { product: Product; onClose: () => void })
 
   return (
     <div className="drawer-wrap" onClick={onClose}>
-      <aside className="drawer" role="dialog" aria-modal="true" aria-label={`${product.name} specifications`} onClick={(e) => e.stopPropagation()}>
+      <aside className="drawer" role="dialog" aria-modal="true" aria-label={`${product.name} details`} onClick={(e) => e.stopPropagation()}>
         <button ref={closeRef} className="drawer-x" onClick={onClose} aria-label="Close">
           <svg width="16" height="16" viewBox="0 0 16 16"><path d="M3 3l10 10M13 3L3 13" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" /></svg>
         </button>
         <div className="drawer-art">
-          <Sym id={product.art.sym} view={product.art.view} css={product.art.css} />
+          <Image src={`/products/${product.image}.webp`} width={321} height={273} alt={product.name} />
         </div>
-        <Label>{product.group}</Label>
+        <Label>{product.category}</Label>
         <h3>{product.name}</h3>
-        <p className="tagline">{product.tagline}</p>
         <dl className="specs-list">
-          {product.specs.map((s) => (
-            <div key={s.label}><dt>{s.label}</dt><dd>{s.value}</dd></div>
-          ))}
+          <div><dt>Brand</dt><dd>{product.brand}</dd></div>
+          <div><dt>Category</dt><dd>{product.category}</dd></div>
+          <div><dt>Variant</dt><dd>{product.variant}</dd></div>
+          <div><dt>Pack size</dt><dd>{product.size}</dd></div>
+          {product.claims.length > 0 && (
+            <div><dt>On the pack</dt><dd><ul className="claims">{product.claims.map((c) => <li key={c}>{c}</li>)}</ul></dd></div>
+          )}
         </dl>
-        <p className="sample-note">Sample details. The final product information will come from AmLion.</p>
-        <a className="btn btn-dark" href="#where-to-buy" onClick={onClose}>
-          <Roll>Find it in a shop</Roll><span className="arrow"><Icon id="i-arrow" /></span>
-        </a>
+        <p className="sample-note">Details are read from the pack. Ingredients and directions will come from AmLion.</p>
       </aside>
     </div>
   );
 }
 
-/** Our products: browse by group and open specifications. No buying on the site. */
+/** Our products: five category tabs, three cards per row, click a card for details. No buying on the site. */
 export function Products() {
-  const [group, setGroup] = useState<(typeof GROUPS)[number]>("All");
+  const [tab, setTab] = useState<(typeof TABS)[number]>("All");
   const [open, setOpen] = useState<Product | null>(null);
   const close = useCallback(() => setOpen(null), []);
-  const shown = PRODUCTS.filter((p) => group === "All" || p.group === group);
+  const shown = PRODUCTS.filter((p) => tab === "All" || p.category === tab);
 
   return (
     <section className="block" id="products">
@@ -65,24 +66,23 @@ export function Products() {
           <p className="lede center">See what is in each pack before you shop. AmLion is sold in cosmetic shops and super shops, not on this website.</p>
         </div>
 
-        <div className="tabs reveal" role="tablist" aria-label="Product groups">
-          {GROUPS.map((g) => (
-            <button key={g} role="tab" aria-selected={group === g} className={group === g ? "on" : ""} onClick={() => setGroup(g)}>{g}</button>
+        <div className="tabs reveal" role="tablist" aria-label="Product categories">
+          {TABS.map((t) => (
+            <button key={t} role="tab" aria-selected={tab === t} className={tab === t ? "on" : ""} onClick={() => setTab(t)}>{t}</button>
           ))}
         </div>
 
         <div className="pgrid">
           {shown.map((p) => (
-            <article key={p.id} className="pcard">
-              <span className="sample-tag">Sample</span>
-              <div className="pcard-art"><Sym id={p.art.sym} view={p.art.view} css={p.art.css} /></div>
-              <div className="pcard-body">
-                <span className="tag">{p.group}</span>
-                <h3>{p.name}</h3>
-                <p>{p.tagline}</p>
-                <button className="btn btn-line" onClick={() => setOpen(p)}><Roll>View specifications</Roll></button>
-              </div>
-            </article>
+            <button key={p.id} className="pc" onClick={() => setOpen(p)} aria-label={`${p.name}, view details`}>
+              <span className="pc-img">
+                <Image src={`/products/${p.image}.webp`} width={321} height={273} alt="" sizes="321px" />
+              </span>
+              <span className="pc-body">
+                <span className="pc-tag">{p.category}</span>
+                <span className="pc-name">{p.name}</span>
+              </span>
+            </button>
           ))}
         </div>
       </div>

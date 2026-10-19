@@ -17,84 +17,38 @@ export const TRUST_CARDS: TrustCard[] = [
   { code: "K", sub: "KOSHER", color: "#8A5A00", title: "Kosher certified", plain: "Another independent check that what goes into the product is accounted for." },
 ];
 
+export const CATEGORIES = ["Oral Care", "Fragrance", "Personal Care", "Skin Care"] as const;
+export type Category = (typeof CATEGORIES)[number];
+
 export type Product = {
   id: string;
-  group: "Oral care" | "Hair care" | "Body & skin";
   name: string;
-  tagline: string;
-  /** Illustration colours for the placeholder pack: sprite id + css custom properties. */
-  art: { sym: string; css: string; view?: string };
-  specs: { label: string; value: string }[];
+  category: Category;
+  brand: "Ziya" | "Syawo";
+  /** Flavour, scent or type, as printed on the pack. */
+  variant: string;
+  /** Pack size as printed on the pack. */
+  size: string;
+  /** Claims printed on the pack. Ingredients and directions still need to come from AmLion. */
+  claims: string[];
+  /** File in /public/products */
+  image: string;
 };
 
-/** SAMPLE products. Names, sizes and ingredients are placeholders, not AmLion's real range. */
+/** Products from the Figma "Cards" section, in design order. Details are read from the pack artwork. */
 export const PRODUCTS: Product[] = [
-  {
-    id: "toothpaste-fresh", group: "Oral care", name: "Fresh Mint Toothpaste", tagline: "Everyday clean and fresh breath",
-    art: { sym: "i-tube", css: "--t1:#1D6BDC;--t2:#fff;--t3:#EAF2FB" },
-    specs: [
-      { label: "Pack size", value: "150 g tube" },
-      { label: "Key ingredients", value: "Fluoride, mint, calcium" },
-      { label: "Benefits", value: "Cavity protection, fresh breath" },
-      { label: "How to use", value: "Brush twice a day for two minutes" },
-      { label: "Halal", value: "Certified by JAKIM" },
-    ],
-  },
-  {
-    id: "toothpaste-kids", group: "Oral care", name: "Kids Fruit Toothpaste", tagline: "A flavour children like to brush with",
-    art: { sym: "i-tube", css: "--t1:#F05A7E;--t2:#fff;--t3:#FFE3EA" },
-    specs: [
-      { label: "Pack size", value: "70 g tube" },
-      { label: "Key ingredients", value: "Low-fluoride formula, fruit flavour" },
-      { label: "Benefits", value: "Gentle on young teeth" },
-      { label: "How to use", value: "A pea-sized amount, with adult supervision" },
-      { label: "Halal", value: "Certified by JAKIM" },
-    ],
-  },
-  {
-    id: "mouthwash", group: "Oral care", name: "Daily Mouthwash", tagline: "Rinse for lasting freshness",
-    art: { sym: "i-rinse", css: "--b1:#13A6B8;--b2:#F4FBFC" },
-    specs: [
-      { label: "Pack size", value: "500 ml bottle" },
-      { label: "Key ingredients", value: "Mint, zinc" },
-      { label: "Benefits", value: "Freshness that lasts" },
-      { label: "How to use", value: "Rinse 20 ml for 30 seconds, then spit" },
-      { label: "Halal", value: "Certified by JAKIM" },
-    ],
-  },
-  {
-    id: "shampoo", group: "Hair care", name: "Gentle Care Shampoo", tagline: "Soft, clean hair for the whole family",
-    art: { sym: "i-pump", css: "--b1:#8E7CF0;--b2:#2A2346" },
-    specs: [
-      { label: "Pack size", value: "400 ml pump bottle" },
-      { label: "Key ingredients", value: "Mild cleansers, conditioning agents" },
-      { label: "Benefits", value: "Cleans gently, leaves hair soft" },
-      { label: "How to use", value: "Massage into wet hair, then rinse" },
-      { label: "Halal", value: "Certified by JAKIM" },
-    ],
-  },
-  {
-    id: "body-wash", group: "Body & skin", name: "Fresh Body Wash", tagline: "A clean, soft feel after every shower",
-    art: { sym: "i-bottle", css: "--b1:#F06B9C;--b2:#fff" },
-    specs: [
-      { label: "Pack size", value: "500 ml bottle" },
-      { label: "Key ingredients", value: "Mild cleansers, moisturisers" },
-      { label: "Benefits", value: "Cleans without drying" },
-      { label: "How to use", value: "Lather on wet skin, then rinse" },
-      { label: "Halal", value: "Certified by JAKIM" },
-    ],
-  },
-  {
-    id: "lotion", group: "Body & skin", name: "Soft Skin Lotion", tagline: "Daily moisture for dry skin",
-    art: { sym: "i-jar", css: "--b1:#FFD2DE;--b2:#F05A7E;--b3:#FFE3EA", view: "0 0 120 100" },
-    specs: [
-      { label: "Pack size", value: "200 ml" },
-      { label: "Key ingredients", value: "Glycerin, vitamin E" },
-      { label: "Benefits", value: "Keeps skin soft for hours" },
-      { label: "How to use", value: "Apply to clean, dry skin as needed" },
-      { label: "Halal", value: "Certified by JAKIM" },
-    ],
-  },
+  { id: "syawo-sensual-mist-cologne", name: "Syawo Sensual Mist Cologne", category: "Fragrance", brand: "Syawo", variant: "Sensual mist cologne", size: "50 ml", claims: [], image: "syawo-sensual-mist-cologne" },
+  { id: "ziya-enamel-protect-toothpaste", name: "Ziya Enamel Protect Toothpaste", category: "Oral Care", brand: "Ziya", variant: "Fresh mint", size: "100 g", claims: ["Stronger enamel", "Cavity protection", "Long-lasting freshness"], image: "ziya-enamel-protect-toothpaste" },
+  { id: "ziya-oral-spray-children", name: "Ziya Oral Spray - Children", category: "Oral Care", brand: "Ziya", variant: "Strawberry flavour", size: "20 ml", claims: ["Helps freshen breath", "Supports oral hygiene", "Mild and safe for children", "Tasty strawberry flavour"], image: "ziya-oral-spray-children" },
+  { id: "ziya-oral-spray-honey-soothing", name: "Ziya Oral Spray - Honey Soothing", category: "Oral Care", brand: "Ziya", variant: "Honey soothing", size: "20 ml", claims: ["Soothes sore throat", "Supports oral hygiene", "Natural honey extract", "Mild and safe for daily use"], image: "ziya-oral-spray-honey-soothing" },
+  { id: "ziya-sensitive-instant-relief-toothpaste", name: "Ziya Sensitive Instant Relief Toothpaste", category: "Oral Care", brand: "Ziya", variant: "Mild mint", size: "100 g", claims: ["Rapid relief from tooth sensitivity", "Strengthens enamel", "Gentle cleaning", "Freshens breath"], image: "ziya-sensitive-instant-relief-toothpaste" },
+  { id: "ziya-radiant-fresh-toothpaste", name: "Ziya Radiant Fresh Toothpaste", category: "Oral Care", brand: "Ziya", variant: "Cool mint", size: "100 g", claims: ["Long-lasting freshness and whiter teeth", "Cavity protection", "Fresh breath", "Removes plaque"], image: "ziya-radiant-fresh-toothpaste" },
+  { id: "ziya-olive-oil", name: "Ziya Olive Oil", category: "Skin Care", brand: "Ziya", variant: "100% pure olive oil", size: "100 ml", claims: ["Natural goodness for healthy skin and hair", "Nourishes skin", "Strengthens hair", "Rich in antioxidants", "No added chemicals"], image: "ziya-olive-oil" },
+  { id: "ziya-petroleum-jelly-coco-butter", name: "Ziya Petroleum Jelly - Coco Butter", category: "Skin Care", brand: "Ziya", variant: "Coco butter", size: "50 gm", claims: ["Deep moisture for soft and healthy skin", "Locks in moisture", "Softens dry skin", "Protects skin barrier", "Dermatologically tested"], image: "ziya-petroleum-jelly-coco-butter" },
+  { id: "syawo-shower-rich-whitening", name: "Syawo Shower - Rich Whitening", category: "Personal Care", brand: "Syawo", variant: "Shower cream with milk protein and vitamin E", size: "250 ml", claims: ["For brighter, smoother and healthier skin", "Brightens skin", "Moisturises deeply", "Long-lasting freshness", "Gentle and safe"], image: "syawo-shower-rich-whitening" },
+  { id: "ziya-petroleum-jelly-lemon-fresh", name: "Ziya Petroleum Jelly - Lemon Fresh", category: "Skin Care", brand: "Ziya", variant: "Lemon fresh", size: "50 gm", claims: ["Deep moisture for soft and healthy skin", "Locks in moisture", "Softens dry skin", "Protects skin barrier", "Dermatologically tested"], image: "ziya-petroleum-jelly-lemon-fresh" },
+  { id: "syawo-body-wash-rich-moisturising", name: "Syawo Body Wash - Rich Moisturising", category: "Personal Care", brand: "Syawo", variant: "With milk protein and aloe vera extract", size: "300 ml", claims: ["Deep moisturisation", "Nourishes skin", "Makes skin soft and smooth", "Gentle and safe"], image: "syawo-body-wash-rich-moisturising" },
+  { id: "syawo-perfume-mist-cologne-summer", name: "Syawo Perfume - Mist Cologne - Summer", category: "Fragrance", brand: "Syawo", variant: "Summer, eau de cologne", size: "50 ml", claims: ["Fresh, energising and long-lasting fragrance", "Skin friendly", "Everyday use", "Perfect for summer"], image: "syawo-perfume-mist-cologne-summer" },
 ];
 
 export const GENUINE_CHECKS = [
@@ -126,3 +80,31 @@ export type Stockist = { name: string; area: string; type: "Cosmetic shop" | "Su
 
 /** Fill in once AmLion supplies real stockists. Empty on purpose: the page shows a "coming soon" state. */
 export const STOCKISTS: Partial<Record<Division, Stockist[]>> = {};
+
+export type NewsItem = {
+  id: string;
+  kind: "News" | "Event";
+  when: string;
+  title: string;
+  summary: string;
+  cover: "arrival" | "event" | "halal";
+};
+
+/** SAMPLE news and events. Replace with real posts and dates from AML. Cards have no detail pages. */
+export const NEWS: NewsItem[] = [
+  {
+    id: "arrival", kind: "News", when: "Coming soon", cover: "arrival",
+    title: "AML products are arriving in shops across Bangladesh",
+    summary: "Look for Ziya and Syawo in cosmetic shops and super shops as stock reaches shelves near you.",
+  },
+  {
+    id: "event", kind: "Event", when: "Dates to be announced", cover: "event",
+    title: "Meet the AML team at upcoming events",
+    summary: "We will share dates and places here as soon as they are confirmed.",
+  },
+  {
+    id: "halal", kind: "News", when: "Coming soon", cover: "halal",
+    title: "Why the Halal mark matters when you choose personal care",
+    summary: "A short guide to what JAKIM Halal certification means for your family.",
+  },
+];

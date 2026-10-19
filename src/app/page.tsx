@@ -4,6 +4,7 @@ import { ExportMarket } from "@/components/Export";
 import { Footer } from "@/components/Footer";
 import { Hero } from "@/components/Hero";
 import { FloatNav, WhatsApp } from "@/components/Nav";
+import { News } from "@/components/News";
 import { Products } from "@/components/Products";
 import { Faq, Genuine, WhereToBuy, Why } from "@/components/Shopper";
 import { Plant, Story } from "@/components/Story";
@@ -28,6 +29,7 @@ export default function Home() {
         <WhereToBuy />
         <Faq />
         <Ask />
+        <News />
         <Footer />
       </div>
       <WhatsApp />
