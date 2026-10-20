@@ -51,12 +51,25 @@ export const PRODUCTS: Product[] = [
   { id: "syawo-perfume-mist-cologne-summer", name: "Syawo Perfume - Mist Cologne - Summer", category: "Fragrance", brand: "Syawo", variant: "Summer, eau de cologne", size: "50 ml", claims: ["Fresh, energising and long-lasting fragrance", "Skin friendly", "Everyday use", "Perfect for summer"], image: "syawo-perfume-mist-cologne-summer" },
 ];
 
-export const GENUINE_CHECKS = [
-  { title: "The AmLion name", text: "Look for the AmLion name clearly printed on the front of the pack." },
-  { title: "The Halal mark", text: "Genuine packs carry the Halal mark from JAKIM, Malaysia." },
-  { title: "Made in Malaysia", text: "The label names AmLion as the maker and gives its Selangor, Malaysia address." },
-  { title: "A clean, sealed pack", text: "Tubes and bottles are sealed, undamaged and neatly printed." },
-] as const;
+export type GenuineCheck = {
+  title: string;
+  text: string;
+  /** Which side of the pack shows it, and where (percent of the pack image). */
+  side: "front" | "back";
+  x: number;
+  y: number;
+  /** Optional zoom centre, when the marker sits beside the feature rather than on it. */
+  zx?: number;
+  zy?: number;
+};
+
+/** Checks a shopper can do on the pack. Confirm each against AmLion's real Bangladesh packaging. */
+export const GENUINE_CHECKS: GenuineCheck[] = [
+  { title: "The brand name", text: "Ziya or Syawo is printed clearly on the front, with sharp, even colours.", side: "front", x: 41.5, y: 18.5 },
+  { title: "The Halal mark", text: "Genuine packs carry the official Halal mark from JAKIM, Malaysia.", side: "back", x: 36.5, y: 66.5, zx: 30, zy: 74 },
+  { title: "Made by AmLion in Malaysia", text: "The back label names AmLion as the maker and gives its Selangor, Malaysia address.", side: "back", x: 77, y: 72, zx: 57, zy: 76 },
+  { title: "A clean, sealed pack", text: "The tube end is sealed flat and the box is undamaged and neatly printed.", side: "front", x: 65.5, y: 17.5 },
+];
 
 export const BENEFITS = [
   { title: "Halal, made to standard", text: "Certified by JAKIM, so you can buy with confidence.", color: "#E9F8F1", ink: "#0B4A35" },
@@ -74,12 +87,6 @@ export const FAQS = [
   { q: "Which products does AmLion make?", a: "Toothpaste, mouthwash and oral care kits, plus shampoo, body wash, lotion and creams. See the full range in Our products." },
 ] as const;
 
-export const DIVISIONS = ["Dhaka", "Chattogram", "Rajshahi", "Khulna", "Barishal", "Sylhet", "Rangpur", "Mymensingh"] as const;
-export type Division = (typeof DIVISIONS)[number];
-export type Stockist = { name: string; area: string; type: "Cosmetic shop" | "Super shop" };
-
-/** Fill in once AmLion supplies real stockists. Empty on purpose: the page shows a "coming soon" state. */
-export const STOCKISTS: Partial<Record<Division, Stockist[]>> = {};
 
 export type NewsItem = {
   id: string;

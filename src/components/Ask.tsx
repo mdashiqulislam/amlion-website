@@ -3,7 +3,7 @@
 import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { CONTACT } from "@/data/content";
-import { CloudLayer, Icon, Label, Puff, Roll } from "./ui";
+import { CloudLayer, Icon, Puff, Roll } from "./ui";
 
 const DEFAULT_MSG = "We use your details only to answer your question.";
 const TOPICS = ["A product question", "Is this pack genuine?", "Where can I buy AmLion?", "Something else"];
@@ -61,7 +61,6 @@ export function Ask() {
           <Puff css="width:560px;height:200px;left:-200px;bottom:-120px" />
         </div>
         <div className="copy reveal">
-          <Label style={{ color: "rgba(255,255,255,.85)" }}>Get in touch</Label>
           <h2 className="h2">Got a question about AmLion?</h2>
           <p>Ask about a product, check a pack, or find out where to buy. A member of the AmLion team will reply.</p>
           <div className="direct">

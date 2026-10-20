@@ -3,7 +3,6 @@
 import { useMemo, useRef, useState } from "react";
 import { COUNTRIES, HQ, LAND } from "@/data/content";
 import { CountUp } from "./Effects";
-import { Label } from "./ui";
 
 const W = 1000, H = 375, LAT0 = 75, LAT1 = -60;
 const px = (lon: number) => ((lon + 180) / 360) * W;
@@ -89,7 +88,6 @@ export function ExportMarket() {
       <div className="wrap">
         <div className="sec-head split reveal">
           <div style={{ display: "grid", gap: 18 }}>
-            <Label>Trusted worldwide</Label>
             <h2 className="h2" style={{ maxWidth: "13em" }}>Made in Malaysia. <span className="soft">Trusted in 30+ countries.</span></h2>
           </div>
           <p className="lede">AmLion products are used in more than 30 countries across 5 continents. Bangladesh is our newest home.</p>

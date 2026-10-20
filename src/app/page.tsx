@@ -6,7 +6,8 @@ import { Hero } from "@/components/Hero";
 import { FloatNav, WhatsApp } from "@/components/Nav";
 import { News } from "@/components/News";
 import { Products } from "@/components/Products";
-import { Faq, Genuine, WhereToBuy, Why } from "@/components/Shopper";
+import { Faq, Why } from "@/components/Shopper";
+import { Genuine } from "@/components/Genuine";
 import { Plant, Story } from "@/components/Story";
 import { Trust } from "@/components/Trust";
 import { Sprite } from "@/components/ui";
@@ -26,7 +27,6 @@ export default function Home() {
         <Genuine />
         <Why />
         <ExportMarket />
-        <WhereToBuy />
         <Faq />
         <Ask />
         <News />

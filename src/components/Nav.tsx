@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { NAV_LINKS } from "@/data/content";
-import { Icon, Logo, Roll } from "./ui";
+import { Icon, Roll } from "./ui";
 
 /** Navigation inside the hero frame, with the mobile menu. */
 export function HeroNav() {
@@ -47,13 +47,15 @@ export function FloatNav() {
 
   return (
     <nav className={`float-nav${show ? " show" : ""}`} aria-label="Quick">
-      <Logo />
+      <a className="float-logo" href="#top" aria-label="AML Consumer Care Ltd home">
+        <Image src="/hero/logo-dark.svg" width={79} height={41} alt="AML Consumer Care Ltd" />
+      </a>
       <div className="navlinks">
         {NAV_LINKS.map((l) => (
           <a key={l.href} className="navlink" href={l.href}><Roll>{l.label}</Roll></a>
         ))}
       </div>
-      <a className="btn btn-lime" href="#where-to-buy" style={{ paddingRight: 18 }}><Roll>Find a shop</Roll></a>
+      <a className="btn btn-lime" href="#contact" style={{ paddingRight: 18 }}><Roll>Request a quote</Roll></a>
     </nav>
   );
 }

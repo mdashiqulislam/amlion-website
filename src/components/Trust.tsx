@@ -1,5 +1,5 @@
 import { TRUST_CARDS, TRUST_FEATURED } from "@/data/consumer";
-import { Label, Seal } from "./ui";
+import { Seal } from "./ui";
 
 /** Why you can trust AmLion: certifications explained in plain words. */
 export function Trust() {
@@ -7,7 +7,6 @@ export function Trust() {
     <section className="block" id="trust">
       <div className="wrap panel">
         <div className="sec-head reveal">
-          <Label>Why you can trust AmLion</Label>
           <h2 className="h2" style={{ maxWidth: "14em" }}>Checked and certified, <span className="soft">so you don&apos;t have to wonder</span></h2>
           <p className="lede center">Seven independent certifications cover how AmLion products are made, from Halal to quality to safety. Here is what each one means for you.</p>
         </div>

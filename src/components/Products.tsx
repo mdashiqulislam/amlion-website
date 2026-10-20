@@ -61,7 +61,6 @@ export function Products() {
     <section className="block" id="products">
       <div className="wrap">
         <div className="sec-head reveal">
-          <Label>Our products</Label>
           <h2 className="h2" style={{ maxWidth: "14em" }}>Care for every day, <span className="soft">for the whole family</span></h2>
           <p className="lede center">See what is in each pack before you shop. AmLion is sold in cosmetic shops and super shops, not on this website.</p>
         </div>

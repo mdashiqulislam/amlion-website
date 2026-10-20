@@ -13,6 +13,7 @@ export function Hero() {
   return (
     <header className="hero2" id="top">
       <HeroVideo />
+      <div className="hero2-soften" aria-hidden="true" />
       <div className="hero2-shade" aria-hidden="true" />
 
       <HeroNav />

@@ -1,36 +1,8 @@
+import Image from "next/image";
 import { CONTACT } from "@/data/content";
 import { BELT_ITEMS } from "@/data/content";
 import { CountUp } from "./Effects";
 import { Label, Sym } from "./ui";
-
-function Factory() {
-  return (
-    <svg className="scene" viewBox="0 0 400 520" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs>
-        <linearGradient id="fsky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#2E7FE6" /><stop offset=".7" stopColor="#9ED0F7" /></linearGradient>
-        <linearGradient id="fwall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#F3E6DA" /><stop offset="1" stopColor="#DCC6B2" /></linearGradient>
-      </defs>
-      <rect width="400" height="520" fill="url(#fsky)" />
-      <ellipse cx="80" cy="120" rx="90" ry="26" fill="#fff" opacity=".7" />
-      <ellipse cx="300" cy="80" rx="70" ry="18" fill="#fff" opacity=".55" />
-      <rect x="40" y="170" width="320" height="210" fill="url(#fwall)" />
-      <rect x="40" y="160" width="320" height="16" fill="#C8A98D" />
-      <rect x="150" y="120" width="100" height="56" rx="6" fill="#E9DCCF" />
-      <circle cx="200" cy="148" r="18" fill="#1C9BD7" />
-      <path d="M190 156l8-18h6l-8 18zM201 156l6-12 6 12h-5l-1-3-1 3z" fill="#fff" />
-      <g fill="#2C5A86" opacity=".85">
-        {[62, 108, 258, 304].flatMap((x) => [196, 256].map((y) => <rect key={`${x}-${y}`} x={x} y={y} width="34" height="40" rx="3" />))}
-      </g>
-      <rect x="160" y="196" width="80" height="184" fill="#2C5A86" opacity=".9" />
-      <path d="M160 196h80v184h-80z" fill="url(#gloss)" opacity=".5" />
-      <rect x="0" y="372" width="400" height="148" fill="#8FA39A" />
-      <rect x="0" y="420" width="400" height="100" fill="#5E6B70" />
-      <path d="M0 468h400" stroke="#fff" strokeWidth="3" strokeDasharray="26 18" opacity=".7" />
-      <g fill="#2F7A4E"><circle cx="20" cy="350" r="40" /><circle cx="58" cy="364" r="30" /><circle cx="380" cy="346" r="44" /><circle cx="342" cy="366" r="28" /></g>
-      <g fill="#3E9563"><circle cx="34" cy="336" r="24" /><circle cx="368" cy="330" r="26" /></g>
-    </svg>
-  );
-}
 
 /** Who is AmLion: proves it is a real company, in plain words. */
 export function Story() {
@@ -38,7 +10,6 @@ export function Story() {
     <section className="block" id="about">
       <div className="wrap">
         <div className="sec-head reveal">
-          <Label>Who is AmLion</Label>
           <h2 className="h2" style={{ maxWidth: "16em" }}>
             Real care from a real <span className="inline-pill" style={{ background: "#DDEEFF" }}><Sym id="i-tube" css="--t1:#1D6BDC" /></span> Malaysian company, <span className="soft">now on your <span className="inline-pill" style={{ background: "var(--lime)" }}><Sym id="i-pump" css="--b1:#12805C;--b2:#0E1306" /></span> local shelf</span>
           </h2>
@@ -49,7 +20,7 @@ export function Story() {
 
         <div className="bento">
           <div className="tile photo reveal">
-            <Factory />
+            <Image className="scene" src="/about/factory.webp" alt="AmLion factory building under a blue sky" fill sizes="(max-width: 720px) 100vw, 400px" />
             <span className="badge">Selangor, Malaysia</span>
             <div className="overlay">
               <div className="stat" style={{ fontSize: 64 }}><CountUp to={15} /><small>+</small></div>
@@ -101,7 +72,6 @@ export function Plant() {
     <section className="block" aria-label="Inside our factory">
       <div className="wrap plant reveal">
         <div className="copy">
-          <Label>Inside our factory</Label>
           <h2 className="h2">Clean lines. <span style={{ color: "#7FB6EE" }}>Careful checks.</span> Every batch.</h2>
           <p>Every tube and bottle is made in our own factory in Selangor, with modern equipment and strict quality rules, so what reaches you is the same every time.</p>
           <div className="plant-stats"><span>Own factory in Selangor</span><span>Checked every batch</span><span>Halal certified</span></div>

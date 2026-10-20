@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { NEWS } from "@/data/consumer";
 import type { NewsItem } from "@/data/consumer";
-import { Label, Seal, Sym } from "./ui";
+import { Seal, Sym } from "./ui";
 
 function Cover({ kind }: { kind: NewsItem["cover"] }) {
   if (kind === "arrival") {
@@ -40,7 +40,6 @@ export function News() {
     <section className="block" id="news">
       <div className="wrap">
         <div className="sec-head reveal">
-          <Label>News &amp; events</Label>
           <h2 className="h2" style={{ maxWidth: "14em" }}>Events and news <span className="soft">from AML</span></h2>
           <p className="lede center">What is happening at AML and where you can meet us. Sample posts are shown until real ones are added.</p>
         </div>
