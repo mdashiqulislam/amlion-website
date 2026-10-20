@@ -1,25 +1,9 @@
 import Image from "next/image";
+import Link from "next/link";
 import { NEWS } from "@/data/consumer";
 import type { NewsItem } from "@/data/consumer";
-
-/** One photo per card, matched to its story. `pos` keeps the subject in frame when the photo is cropped. */
-const COVERS: Record<NewsItem["cover"], { src: string; alt: string; pos: string }> = {
-  arrival: {
-    src: "/news/arrival.webp",
-    alt: "Ziya Enamel Protect toothpaste and Syawo body wash on a shop shelf in a store",
-    pos: "50% 60%",
-  },
-  event: {
-    src: "/news/event.webp",
-    alt: "The AML Consumer Care Ltd exhibition stand with Ziya and Syawo products on display",
-    pos: "50% 58%",
-  },
-  halal: {
-    src: "/news/halal.webp",
-    alt: "Syawo and Ziya personal care products beside a green Halal mark",
-    pos: "50% 62%",
-  },
-};
+import { COVERS, POSTS } from "@/data/news";
+import { Icon } from "./ui";
 
 function Cover({ kind }: { kind: NewsItem["cover"] }) {
   const c = COVERS[kind];
@@ -30,7 +14,26 @@ function Cover({ kind }: { kind: NewsItem["cover"] }) {
   );
 }
 
-/** News and events overview. Cards are informational only: no links and no detail pages. */
+/** A news or event card. It links to its article when one exists in POSTS, otherwise it is informational only. */
+export function NewsCard({ n }: { n: NewsItem }) {
+  const linked = POSTS.some((p) => p.slug === n.id);
+  return (
+    <article className={`nc${linked ? " linked" : ""}`}>
+      <Cover kind={n.cover} />
+      <div className="nc-body">
+        <div className="nc-meta">
+          <span className={`nc-tag ${n.kind === "Event" ? "ev" : ""}`}>{n.kind}</span>
+          <span className="nc-when">{n.when}</span>
+        </div>
+        <h3>{linked ? <Link href={`/news/${n.id}`} className="nc-link">{n.title}</Link> : n.title}</h3>
+        <p>{n.summary}</p>
+        {linked && <span className="nc-more" aria-hidden="true">Read article <i><Icon id="i-arrow" size={14} /></i></span>}
+      </div>
+    </article>
+  );
+}
+
+/** News and events overview. Cards link to an article when one exists. */
 export function News() {
   return (
     <section className="block" id="news">
@@ -41,19 +44,7 @@ export function News() {
         </div>
 
         <div className="ngrid">
-          {NEWS.map((n) => (
-            <article key={n.id} className="nc">
-              <Cover kind={n.cover} />
-              <div className="nc-body">
-                <div className="nc-meta">
-                  <span className={`nc-tag ${n.kind === "Event" ? "ev" : ""}`}>{n.kind}</span>
-                  <span className="nc-when">{n.when}</span>
-                </div>
-                <h3>{n.title}</h3>
-                <p>{n.summary}</p>
-              </div>
-            </article>
-          ))}
+          {NEWS.map((n) => <NewsCard key={n.id} n={n} />)}
         </div>
       </div>
     </section>

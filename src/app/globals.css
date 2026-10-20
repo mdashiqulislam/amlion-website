@@ -1140,3 +1140,71 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 @media (max-width: 720px) {
   .pr-head .btn { align-self: flex-start; }
 }
+
+/* ---------- Article (news and blog detail template) ---------- */
+.nc.linked { position: relative; cursor: pointer; transition: transform .35s ease, box-shadow .35s ease; }
+.nc.linked:hover, .nc.linked:focus-within { transform: translateY(-4px); box-shadow: 0 24px 40px -28px rgba(10,34,64,.4); }
+.nc-link { color: inherit; }
+.nc-link::after { content: ""; position: absolute; inset: 0; border-radius: inherit; z-index: 1; }
+.nc.linked:has(.nc-link:focus-visible) { outline: 3px solid var(--brand); outline-offset: 3px; }
+.nc-link:focus-visible { outline: none; }
+.nc-more { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; margin-top: 4px; }
+.nc-more i { width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: #fff; display: grid; place-items: center; transition: transform .3s ease, background-color .25s ease, color .25s ease; }
+.nc.linked:hover .nc-more i, .nc.linked:focus-within .nc-more i { background: var(--lime); color: var(--lime-ink); transform: rotate(45deg); }
+
+.art-head { display: grid; gap: 18px; max-width: 860px; margin-bottom: 36px; }
+.art-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 12px; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--ink-2); }
+.art-head h1 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(36px, 5.4vw, 68px); line-height: 1.04; letter-spacing: -0.058em; text-wrap: balance; }
+.art-lede { margin: 0; font-size: clamp(18px, 2vw, 22px); line-height: 1.55; color: #33404F; max-width: 60ch; }
+.art-by { margin: 0; font-size: 15px; color: var(--ink-2); }
+.art-cover { position: relative; margin: 0 0 clamp(36px, 5vw, 64px); aspect-ratio: 2 / 1; max-height: 560px; width: 100%; border-radius: var(--radius-xl); overflow: hidden; background: var(--surface); }
+.art-cover img { object-fit: cover; }
+.art-layout { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: clamp(32px, 5vw, 72px); align-items: start; }
+.art-body { min-width: 0; max-width: 740px; display: grid; gap: 22px; }
+.art-body p { margin: 0; font-size: 19px; line-height: 1.75; color: #26323F; }
+.art-body h2 { margin: 28px 0 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(26px, 3vw, 36px); line-height: 1.12; letter-spacing: -0.045em; scroll-margin-top: 100px; }
+.art-body h3 { margin: 12px 0 0; font-family: var(--font-display); font-weight: 600; font-size: 22px; letter-spacing: -0.03em; }
+.art-body .ticks li { font-size: 18px; line-height: 1.6; max-width: none; }
+.art-fig { margin: 10px 0; display: grid; gap: 10px; }
+.art-fig > div { position: relative; aspect-ratio: 3 / 2; border-radius: var(--radius-l); overflow: hidden; background: var(--surface); }
+.art-fig img { object-fit: cover; }
+.art-fig figcaption { font-size: 14px; color: #5E6B7B; }
+.art-quote { margin: 10px 0; padding: 6px 0 6px 24px; border-left: 4px solid var(--lime); display: grid; gap: 8px; }
+.art-quote p { font-family: var(--font-display); font-weight: 500 !important; font-size: clamp(22px, 2.6vw, 30px) !important; line-height: 1.25 !important; letter-spacing: -0.035em; color: var(--ink) !important; }
+.art-quote cite { font-style: normal; font-size: 15px; color: var(--ink-2); }
+.art-callout { margin: 10px 0; padding: 24px 26px; border-radius: var(--radius-l); background: #EAF4FD; box-shadow: inset 0 0 0 1px #CFE3F6; display: grid; gap: 8px; }
+.art-callout b { font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.03em; }
+.art-callout p { font-size: 17px !important; line-height: 1.6 !important; }
+.art-callout .u { justify-self: start; }
+.art-cta { margin-top: 28px; padding: clamp(24px, 3.5vw, 36px); border-radius: var(--radius-xl); background: var(--lime); color: var(--lime-ink); display: grid; gap: 20px; }
+.art-cta h2 { margin: 0 !important; font-size: clamp(26px, 3vw, 34px) !important; }
+.art-cta p { color: var(--lime-ink) !important; font-size: 17px !important; margin-top: 6px !important; }
+.art-cta-actions { display: flex; flex-wrap: wrap; gap: 10px; }
+.art-cta-actions .btn { --h: 52px; padding: 0 22px; font-size: 13px; }
+.art-cta-actions .btn-dark { padding-right: 5px; }
+.art-tags { list-style: none; margin: 18px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 8px; }
+.art-tags li { padding: 6px 14px; border-radius: 999px; background: var(--surface); font-size: 14px; font-weight: 500; }
+.art-side { position: sticky; top: 100px; display: grid; gap: 24px; }
+.art-side nav { background: var(--surface); border-radius: var(--radius-l); padding: 22px; }
+.art-side nav h2 { margin: 0 0 12px; font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.art-side ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 2px; }
+.art-side ol a { display: block; padding: 9px 0; font-weight: 600; font-size: 15px; border-top: 1px solid #D5DDE7; }
+.art-side ol li:first-child a { border-top: 0; }
+.art-side ol a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.share { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+.share-l { width: 100%; font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-2); }
+.share button { min-height: 44px; padding: 0 16px; border-radius: 999px; border: 0; background: var(--surface); box-shadow: inset 0 0 0 1px #D5DDE7; font-weight: 600; font-size: 14px; cursor: pointer; transition: background-color .2s ease; }
+.share button:hover { background: #E4EAF2; }
+.art-more { margin-top: clamp(64px, 8vw, 112px); }
+.art-more .h2 { margin-bottom: 28px; }
+@media (max-width: 960px) {
+  .art-layout { grid-template-columns: 1fr; }
+  .art-side { position: static; grid-template-columns: 1fr; margin-top: 8px; }
+  .art-side nav { display: none; }
+  .art-cover { aspect-ratio: 16 / 10; }
+}
+@media (max-width: 560px) {
+  .art-body p { font-size: 18px; }
+  .art-cta-actions .btn { width: 100%; justify-content: space-between; }
+}
+.art-more .ngrid { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
