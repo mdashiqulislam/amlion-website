@@ -9,8 +9,8 @@ const jakarta = Plus_Jakarta_Sans({ subsets: ["latin"], variable: "--font-jakart
 const dmMono = DM_Mono({ subsets: ["latin"], weight: ["400", "500"], variable: "--font-dm-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "AmLion Group",
-  description: "Halal-certified OEM and private-label manufacturer of toothpaste and personal care products in Malaysia.",
+  title: "AML Consumer Care Ltd",
+  description: "Halal-certified toothpaste and personal care by AML, made in Dhaka and now in cosmetic shops and super shops across Bangladesh.",
 };
 
 export const viewport: Viewport = {

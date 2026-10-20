@@ -3,10 +3,10 @@
 import { useRef, useState } from "react";
 import type { FormEvent } from "react";
 import { CONTACT } from "@/data/content";
-import { CloudLayer, Icon, Label, Puff, Roll } from "./ui";
+import { CloudLayer, Icon, Puff, Roll } from "./ui";
 
 const DEFAULT_MSG = "We use your details only to answer your question.";
-const TOPICS = ["A product question", "Is this pack genuine?", "Where can I buy AmLion?", "Something else"];
+const TOPICS = ["A product question", "Is this pack genuine?", "Where can I buy AML?", "Something else"];
 
 function QuestionForm() {
   const [sent, setSent] = useState(false);
@@ -45,7 +45,7 @@ function QuestionForm() {
       <div className="form-done" hidden={!sent}>
         <div className="ok"><Icon id="i-check" size={26} /></div>
         <h3>Question ready to send</h3>
-        <p className="fine">This is a design prototype, so nothing was sent. On the live site your question goes to the AmLion team.</p>
+        <p className="fine">This is a design prototype, so nothing was sent. On the live site your question goes to the AML team.</p>
         <button className="btn btn-line" type="button" onClick={() => setSent(false)}>Edit question</button>
       </div>
     </form>
@@ -61,9 +61,8 @@ export function Ask() {
           <Puff css="width:560px;height:200px;left:-200px;bottom:-120px" />
         </div>
         <div className="copy reveal">
-          <Label style={{ color: "rgba(255,255,255,.85)" }}>Get in touch</Label>
-          <h2 className="h2">Got a question about AmLion?</h2>
-          <p>Ask about a product, check a pack, or find out where to buy. A member of the AmLion team will reply.</p>
+          <h2 className="h2">Got a question about AML?</h2>
+          <p>Ask about a product, check a pack, or find out where to buy. A member of the AML team will reply.</p>
           <div className="direct">
             <span className="pill"><i><Icon id="i-phone" size={14} /></i>{CONTACT.phone}</span>
             <span className="pill"><i><Icon id="i-mail" size={14} /></i>{CONTACT.email}</span>

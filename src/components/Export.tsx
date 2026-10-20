@@ -3,7 +3,6 @@
 import { useMemo, useRef, useState } from "react";
 import { COUNTRIES, HQ, LAND } from "@/data/content";
 import { CountUp } from "./Effects";
-import { Label } from "./ui";
 
 const W = 1000, H = 375, LAT0 = 75, LAT1 = -60;
 const px = (lon: number) => ((lon + 180) / 360) * W;
@@ -47,12 +46,12 @@ function MapCard() {
             <svg viewBox="0 0 10 6"><rect width="10" height="6" fill="#006A4E" /><circle cx="4.5" cy="3" r="2" fill="#F42A41" /></svg>
           </span>
           <b>Bangladesh</b>
-          <span>Now arriving. AmLion is reaching cosmetic shops and super shops across Bangladesh.</span>
+          <span>Now arriving. AML is reaching cosmetic shops and super shops across Bangladesh.</span>
         </div>
       </div>
 
       <div className="map-wrap">
-        <svg className="map" viewBox="0 0 1000 375" role="img" aria-label="World map of AmLion export markets"
+        <svg className="map" viewBox="0 0 1000 375" role="img" aria-label="World map of AML export markets"
           onPointerOver={(e) => { const p = (e.target as Element).closest(".pin"); if (p) show(p.getAttribute("data-c")); }}
           onPointerOut={(e) => { if ((e.target as Element).closest(".pin")) show(null); }}>
           {dots.map((d, i) => <circle key={i} className="land" cx={d.x.toFixed(1)} cy={d.y.toFixed(1)} r="2.1" />)}
@@ -89,10 +88,9 @@ export function ExportMarket() {
       <div className="wrap">
         <div className="sec-head split reveal">
           <div style={{ display: "grid", gap: 18 }}>
-            <Label>Trusted worldwide</Label>
-            <h2 className="h2" style={{ maxWidth: "13em" }}>Made in Malaysia. <span className="soft">Trusted in 30+ countries.</span></h2>
+            <h2 className="h2" style={{ maxWidth: "13em" }}>Trusted in 30+ countries. <span className="soft">Now in Bangladesh.</span></h2>
           </div>
-          <p className="lede">AmLion products are used in more than 30 countries across 5 continents. Bangladesh is our newest home.</p>
+          <p className="lede">AML Group products are used in more than 30 countries across 5 continents. Bangladesh is our newest home.</p>
         </div>
 
         <div className="export-grid">

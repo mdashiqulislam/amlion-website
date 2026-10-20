@@ -1,8 +1,8 @@
 export const NAV_LINKS = [
-  { href: "#about", label: "About" },
-  { href: "#products", label: "Products" },
-  { href: "#career", label: "Career" },
-  { href: "#contact", label: "Contact us" },
+  { href: "/about", label: "About" },
+  { href: "/products", label: "Products" },
+  { href: "/career", label: "Career" },
+  { href: "/#contact", label: "Contact us" },
 ] as const;
 
 export type Country = { name: string; code: string; lat: number; lon: number };
@@ -66,21 +66,10 @@ export const LAND: Record<string, [number, number][]> = {
   "-52.5": [[-75, -68]],
 };
 
-export const BELT_ITEMS = [
-  { sym: "i-tube", style: "--t1:#1D6BDC" },
-  { sym: "i-rinse", style: "--b1:#13A6B8;--b2:#fff" },
-  { sym: "i-tube", style: "--t1:#F05A7E;--t3:#FFE3EA" },
-  { sym: "i-pump", style: "--b1:#8E7CF0;--b2:#2A2346" },
-  { sym: "i-tube", style: "--t1:#D6FD70;--t2:#0A2240" },
-  { sym: "i-bottle", style: "--b1:#F5A524" },
-  { sym: "i-tube", style: "--t1:#12805C" },
-  { sym: "i-pump", style: "--b1:#FFFFFF;--b2:#1C9BD7;--b3:#DDEEFF" },
-];
-
 export const CONTACT = {
   phone: "+603-6156 5810",
   email: "enquiries@amlion.com.my",
   hours: "Mon to Fri, 8.30am to 5.30pm (MYT)",
-  entities: ["AmLion Toothpaste Mfg. Sdn Bhd", "AmLion Personal Care Mfg. Sdn Bhd", "AmLion Retail Connection Sdn Bhd"],
+  entities: ["AML Consumer Care Ltd, Dhaka, Bangladesh", "AmLion Toothpaste Mfg. Sdn Bhd", "AmLion Personal Care Mfg. Sdn Bhd", "AmLion Retail Connection Sdn Bhd"],
   address: ["Lot 4, Gate 4, Jalan Teknologi 3/4,", "Taman Sains Selangor, Kota Damansara,", "47810 Petaling Jaya,", "Selangor Darul Ehsan, Malaysia"],
 };

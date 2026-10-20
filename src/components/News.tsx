@@ -1,35 +1,31 @@
 import Image from "next/image";
 import { NEWS } from "@/data/consumer";
 import type { NewsItem } from "@/data/consumer";
-import { Label, Seal, Sym } from "./ui";
+
+/** One photo per card, matched to its story. `pos` keeps the subject in frame when the photo is cropped. */
+const COVERS: Record<NewsItem["cover"], { src: string; alt: string; pos: string }> = {
+  arrival: {
+    src: "/news/arrival.webp",
+    alt: "Ziya Enamel Protect toothpaste and Syawo body wash on a shop shelf in a store",
+    pos: "50% 60%",
+  },
+  event: {
+    src: "/news/event.webp",
+    alt: "The AML Consumer Care Ltd exhibition stand with Ziya and Syawo products on display",
+    pos: "50% 58%",
+  },
+  halal: {
+    src: "/news/halal.webp",
+    alt: "Syawo and Ziya personal care products beside a green Halal mark",
+    pos: "50% 62%",
+  },
+};
 
 function Cover({ kind }: { kind: NewsItem["cover"] }) {
-  if (kind === "arrival") {
-    return (
-      <div className="nc-cover" style={{ background: "linear-gradient(160deg, #E3F2FF, #B8DBF8)" }}>
-        <Image className="nc-img a" src="/products/ziya-enamel-protect-toothpaste.webp" width={321} height={273} alt="" />
-        <Image className="nc-img b" src="/products/syawo-body-wash-rich-moisturising.webp" width={321} height={273} alt="" />
-      </div>
-    );
-  }
-  if (kind === "event") {
-    return (
-      <div className="nc-cover" style={{ background: "linear-gradient(160deg, #1D6BDC, #0A2240)" }} aria-hidden="true">
-        <svg viewBox="0 0 400 260" preserveAspectRatio="xMidYMid slice" className="nc-art">
-          <circle cx="330" cy="30" r="140" fill="#3B8DEC" opacity=".55" />
-          <rect x="50" y="130" width="300" height="100" rx="14" fill="#0A2240" />
-          <rect x="50" y="198" width="300" height="26" rx="13" fill="#D6FD70" />
-          <text x="200" y="216" textAnchor="middle" fontFamily="var(--font-dm-mono), monospace" fontSize="12" fill="#142000" letterSpacing="2">AML · EVENT STAND</text>
-          <g transform="translate(86 52) scale(.8)"><Sym id="i-tube" css="--t1:#fff;--t2:#1D6BDC" width={80} height={200} /></g>
-          <g transform="translate(168 62) scale(.72)"><Sym id="i-pump" css="--b1:#D6FD70;--b2:#0A2240" width={80} height={200} /></g>
-          <g transform="translate(246 56) scale(.76)"><Sym id="i-rinse" css="--b1:#13A6B8;--b2:#fff" width={80} height={200} /></g>
-        </svg>
-      </div>
-    );
-  }
+  const c = COVERS[kind];
   return (
-    <div className="nc-cover" style={{ background: "linear-gradient(160deg, #E9F8F1, #BFEBD6)" }} aria-hidden="true">
-      <Seal code="HALAL" sub="JAKIM" color="#12805C" label="" className="nc-seal" />
+    <div className="nc-cover">
+      <Image src={c.src} alt={c.alt} fill sizes="(max-width: 720px) 100vw, 410px" style={{ objectPosition: c.pos }} />
     </div>
   );
 }
@@ -40,7 +36,6 @@ export function News() {
     <section className="block" id="news">
       <div className="wrap">
         <div className="sec-head reveal">
-          <Label>News &amp; events</Label>
           <h2 className="h2" style={{ maxWidth: "14em" }}>Events and news <span className="soft">from AML</span></h2>
           <p className="lede center">What is happening at AML and where you can meet us. Sample posts are shown until real ones are added.</p>
         </div>

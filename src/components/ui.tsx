@@ -44,9 +44,9 @@ export function Roll({ children }: { children: string }) {
 
 export function Logo({ href = "#top" }: { href?: string }) {
   return (
-    <a className="logo" href={href} aria-label="AmLion Group home">
+    <a className="logo" href={href} aria-label="AML Consumer Care Ltd home">
       <svg aria-hidden="true"><use href="#i-logo" /></svg>
-      AmLion
+      AML
     </a>
   );
 }

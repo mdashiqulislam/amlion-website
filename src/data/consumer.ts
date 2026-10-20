@@ -1,20 +1,22 @@
-/** Shopper-facing content. Anything marked SAMPLE must be replaced with AmLion's real product data before launch. */
+/** Shopper-facing content. Anything marked SAMPLE must be replaced with AML's real product data before launch. */
 
-export type TrustCard = { code: string; sub: string; color: string; title: string; plain: string };
+/** logo: file in /public/certs, taken from the certification logos on amlion.com.my. */
+export type TrustCard = { logo: string; w: number; h: number; title: string; plain: string };
 
 export const TRUST_FEATURED = {
+  logo: "halal", w: 353, h: 352,
   title: "Halal certified by JAKIM",
-  text: "AmLion is Halal certified by JAKIM, the Department of Islamic Development Malaysia, one of the most widely recognised Halal authorities. Our factory follows Shariah guidelines from start to finish.",
-  note: "In Bangladesh, most families look for the Halal mark before they buy toothpaste or personal care. With AmLion, that answer is already on the pack.",
+  text: "AML products carry the Halal mark certified by JAKIM, the Department of Islamic Development Malaysia, one of the most widely recognised Halal authorities. Production follows Shariah guidelines from start to finish.",
+  note: "In Bangladesh, most families look for the Halal mark before they buy toothpaste or personal care. With AML, that answer is already on the pack.",
 };
 
 export const TRUST_CARDS: TrustCard[] = [
-  { code: "ISO", sub: "9001:2015", color: "#1D6BDC", title: "ISO 9001:2015", plain: "Quality is checked at every step, so each tube and bottle matches the last." },
-  { code: "GMP", sub: "MOH MALAYSIA", color: "#4B4FD8", title: "Good Manufacturing Practices", plain: "Made in clean, controlled conditions. AmLion earned GMP before Malaysia made it mandatory." },
-  { code: "HACCP", sub: "FOOD SAFETY", color: "#0E9384", title: "HACCP food safety", plain: "A food-grade safety system, applied to products you put in your mouth." },
-  { code: "BRC", sub: "GLOBAL STD", color: "#0A2240", title: "British Retail Consortium", plain: "Trusted as a supplier to British retail brands, one of the strictest markets." },
-  { code: "BSCI", sub: "SOCIAL", color: "#3A4859", title: "BSCI", plain: "Made in factories that follow fair and safe working conditions." },
-  { code: "K", sub: "KOSHER", color: "#8A5A00", title: "Kosher certified", plain: "Another independent check that what goes into the product is accounted for." },
+  { logo: "iso", w: 462, h: 352, title: "ISO 9001:2015", plain: "Quality is checked at every step, so each tube and bottle matches the last." },
+  { logo: "gmp", w: 353, h: 352, title: "Good Manufacturing Practices", plain: "Made in clean, controlled conditions. AML Group earned GMP before Malaysia made it mandatory." },
+  { logo: "haccp", w: 233, h: 337, title: "HACCP food safety", plain: "A food-grade safety system, applied to products you put in your mouth." },
+  { logo: "brc", w: 246, h: 337, title: "British Retail Consortium", plain: "Trusted as a supplier to British retail brands, one of the strictest markets." },
+  { logo: "bsci", w: 519, h: 192, title: "BSCI", plain: "Made in factories that follow fair and safe working conditions." },
+  { logo: "kosher", w: 341, h: 340, title: "Kosher certified", plain: "Another independent check that what goes into the product is accounted for." },
 ];
 
 export const CATEGORIES = ["Oral Care", "Fragrance", "Personal Care", "Skin Care"] as const;
@@ -29,7 +31,7 @@ export type Product = {
   variant: string;
   /** Pack size as printed on the pack. */
   size: string;
-  /** Claims printed on the pack. Ingredients and directions still need to come from AmLion. */
+  /** Claims printed on the pack. Ingredients and directions still need to come from AML. */
   claims: string[];
   /** File in /public/products */
   image: string;
@@ -51,35 +53,43 @@ export const PRODUCTS: Product[] = [
   { id: "syawo-perfume-mist-cologne-summer", name: "Syawo Perfume - Mist Cologne - Summer", category: "Fragrance", brand: "Syawo", variant: "Summer, eau de cologne", size: "50 ml", claims: ["Fresh, energising and long-lasting fragrance", "Skin friendly", "Everyday use", "Perfect for summer"], image: "syawo-perfume-mist-cologne-summer" },
 ];
 
-export const GENUINE_CHECKS = [
-  { title: "The AmLion name", text: "Look for the AmLion name clearly printed on the front of the pack." },
-  { title: "The Halal mark", text: "Genuine packs carry the Halal mark from JAKIM, Malaysia." },
-  { title: "Made in Malaysia", text: "The label names AmLion as the maker and gives its Selangor, Malaysia address." },
-  { title: "A clean, sealed pack", text: "Tubes and bottles are sealed, undamaged and neatly printed." },
-] as const;
+export type GenuineCheck = {
+  title: string;
+  text: string;
+  /** Which side of the pack shows it, and where the marker sits (percent of the pack image). */
+  side: "front" | "back";
+  x: number;
+  y: number;
+  /** Zoom centre when the marker sits beside the feature, and how large the lens draws the pack (px wide). */
+  zx?: number;
+  zy?: number;
+  zoom: number;
+};
+
+/** Checks a shopper can do, matched to the Ziya Radiant Fresh pack images in /public/genuine. */
+export const GENUINE_CHECKS: GenuineCheck[] = [
+  { title: "The brand name", text: "Ziya is printed clearly on the front of the box and the tube, with sharp, even colours.", side: "front", x: 43.4, y: 19.9, zoom: 1500 },
+  { title: "The Halal mark", text: "Genuine packs carry the official Halal mark from JAKIM on the back of the box and the tube.", side: "back", x: 52.5, y: 20.5, zx: 47.1, zy: 14.7, zoom: 1750 },
+  { title: "Made by AML", text: "The back label names the maker, AML Consumer Care Ltd, Dhaka, Bangladesh, with its website.", side: "back", x: 25, y: 85, zx: 33, zy: 85.2, zoom: 1800 },
+  { title: "A clean, sealed pack", text: "The tube end is sealed flat with a clean cap, and the box is undamaged and neatly printed.", side: "front", x: 69.5, y: 90.5, zx: 69.5, zy: 91.6, zoom: 1500 },
+];
 
 export const BENEFITS = [
   { title: "Halal, made to standard", text: "Certified by JAKIM, so you can buy with confidence.", color: "#E9F8F1", ink: "#0B4A35" },
-  { title: "Malaysian quality", text: "Made by a company with 15+ years of making oral and personal care.", color: "#DDEEFF", ink: "#0A2240" },
+  { title: "15+ years of know-how", text: "Backed by AML Group, which has made oral and personal care for more than a decade and a half.", color: "#DDEEFF", ink: "#0A2240" },
   { title: "Care for the whole family", text: "Toothpaste, mouthwash, hair and skin care, including a kids' range.", color: "#FFF1D6", ink: "#4A3300" },
   { title: "Trusted in 30+ countries", text: "Used across five continents, now arriving in Bangladesh.", color: "#EDE7FF", ink: "#2A2346" },
 ] as const;
 
 export const FAQS = [
-  { q: "Is AmLion Halal?", a: "Yes. AmLion is Halal certified by JAKIM, the Department of Islamic Development Malaysia." },
-  { q: "Where is AmLion made?", a: "In our own factories in Selangor, Malaysia, by AmLion Group, which has made oral and personal care products for more than a decade and a half." },
-  { q: "Can I buy AmLion on this website?", a: "No. AmLion has no online shop. You can find our products in cosmetic shops and super shops." },
-  { q: "How do I know a pack is genuine?", a: "Check the AmLion name, the Halal mark, and the maker's name and Malaysian address on the label. Our guide above shows what to look for." },
+  { q: "Is AML Halal?", a: "Yes. AML products carry the Halal mark certified by JAKIM, the Department of Islamic Development Malaysia." },
+  { q: "Where is AML made?", a: "Products sold in Bangladesh are made by AML Consumer Care Ltd in Dhaka, with the know-how of AML Group, which has made oral and personal care products for more than a decade and a half." },
+  { q: "Can I buy AML on this website?", a: "No. AML has no online shop. You can find our products in cosmetic shops and super shops." },
+  { q: "How do I know a pack is genuine?", a: "Check the brand name, the Halal mark, and the maker's name and address on the label: AML Consumer Care Ltd, Dhaka, Bangladesh. Our guide above shows what to look for." },
   { q: "Is it safe for children?", a: "We make a kids' range with child-friendly flavours. Always follow the directions on the pack and supervise young children when they brush." },
-  { q: "Which products does AmLion make?", a: "Toothpaste, mouthwash and oral care kits, plus shampoo, body wash, lotion and creams. See the full range in Our products." },
+  { q: "Which products does AML make?", a: "Toothpaste, mouthwash and oral care kits, plus shampoo, body wash, lotion and creams. See the full range in Our products." },
 ] as const;
 
-export const DIVISIONS = ["Dhaka", "Chattogram", "Rajshahi", "Khulna", "Barishal", "Sylhet", "Rangpur", "Mymensingh"] as const;
-export type Division = (typeof DIVISIONS)[number];
-export type Stockist = { name: string; area: string; type: "Cosmetic shop" | "Super shop" };
-
-/** Fill in once AmLion supplies real stockists. Empty on purpose: the page shows a "coming soon" state. */
-export const STOCKISTS: Partial<Record<Division, Stockist[]>> = {};
 
 export type NewsItem = {
   id: string;
