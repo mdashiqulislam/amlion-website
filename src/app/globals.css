@@ -683,7 +683,7 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
   .why-card { min-height: 0; }
 }
 
-/* ---------- Footer (from Figma "Footer", 1440 x 895) ---------- */
+/* ---------- Footer (from Figma "Footer", 1440 x 703) ---------- */
 .ft {
   margin-top: clamp(80px, 10vw, 136px);
   margin-left: calc(-1 * var(--gutter));
@@ -721,19 +721,19 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .ft-addr li { align-items: flex-start; line-height: 1.4; }
 .ft-addr li img { margin-top: 3px; }
 
-.ft-bar { margin-top: 71px; max-width: 1289px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .12); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 12px; font-size: 13px; line-height: 20.15px; color: rgba(255, 255, 255, .5); }
-.ft-mark { display: block; width: 100%; height: auto; margin-top: 101px; }
+.ft-bar { margin: 71px auto 0; max-width: 1289px; padding-top: 22px; border-top: 1px solid rgba(255, 255, 255, .12); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 12px; font-size: 13px; line-height: 20.15px; color: rgba(255, 255, 255, .5); }
+.ft-mark { display: block; width: 65.83%; height: auto; margin: 43px auto 0; opacity: .11; }
 
 @media (max-width: 1080px) {
   .ft-cols { grid-template-columns: 1fr 1fr; gap: 40px 34px; }
   .ft-bar { margin-top: 56px; }
-  .ft-mark { margin-top: 64px; }
+  .ft-mark { width: 80%; margin-top: 40px; }
 }
 @media (max-width: 720px) {
   .ft-inner { padding-top: 48px; }
   .ft-cols { grid-template-columns: 1fr; }
   .ft-bar { margin-top: 40px; }
-  .ft-mark { margin-top: 48px; }
+  .ft-mark { width: 92%; margin-top: 32px; }
 }
 
 /* ---------- Product cards (from Figma "Cards": 396 x 499, image area 357, text area 142) ---------- */

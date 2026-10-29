@@ -13,7 +13,7 @@ function Item({ icon, children }: { icon: string; children: React.ReactNode }) {
   );
 }
 
-/** Footer from the Figma frame "Footer" (1440 x 895): four columns, a divider row, and a full-width AML wordmark. */
+/** Footer from the Figma frame "Footer" (1440 x 703): four columns, a centred divider row, and a faint AML wordmark sitting on the bottom edge. */
 export function Footer() {
   return (
     <footer className="ft">
@@ -21,7 +21,7 @@ export function Footer() {
         <div className="ft-cols">
           <div className="ft-brand">
             <Image src="/footer/logo.svg" width={84} height={43} alt="AML Consumer Care Ltd" />
-            <p>Toothpaste and personal care made by AML Consumer Care Ltd in Dhaka, Halal certified, now in cosmetic shops and super shops across Bangladesh.</p>
+            <p>Toothpaste and personal care from Dhaka, Halal certified, now in cosmetic shops and super shops across Bangladesh.</p>
             <a className="ft-btn" href="/#contact">
               <Roll>Ask a question</Roll>
               <span className="arrow"><Icon id="i-arrow" /></span>
@@ -60,8 +60,7 @@ export function Footer() {
         </div>
       </div>
 
-      {/* Pre-rendered at 2x: sharp at the top, progressively blurred toward the bottom. */}
-      <Image className="ft-mark" src="/footer/wordmark-blur.webp" width={2880} height={780} alt="" aria-hidden="true" />
+      <Image className="ft-mark" src="/footer/wordmark.svg" width={1440} height={390} alt="" aria-hidden="true" />
     </footer>
   );
 }
