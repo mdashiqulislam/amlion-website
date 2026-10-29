@@ -16,7 +16,7 @@ export default function GeneralApplyPage() {
   return (
     <>
       <Sprite />
-      <FloatNav always />
+      <FloatNav />
       <div className="page career">
         <main id="main" className="job-page">
           <div className="wrap">

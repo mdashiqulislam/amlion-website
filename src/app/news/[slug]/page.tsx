@@ -35,7 +35,7 @@ export default async function NewsArticlePage({ params }: { params: Promise<{ sl
   return (
     <>
       <Sprite />
-      <FloatNav always />
+      <FloatNav />
       <div className="page career">
         <Article item={hit.item} post={hit.post} />
         <Footer />

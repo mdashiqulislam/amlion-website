@@ -13,7 +13,7 @@ export default function AboutPage() {
   return (
     <>
       <Sprite />
-      <FloatNav always />
+      <FloatNav />
       <div className="page career">
         <main id="main">
           <AboutHero />

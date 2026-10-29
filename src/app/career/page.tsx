@@ -14,7 +14,7 @@ export default function CareerPage() {
   return (
     <>
       <Sprite />
-      <FloatNav always />
+      <FloatNav />
       <div className="page career">
         <main id="main">
           <CareerHero />

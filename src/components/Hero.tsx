@@ -1,5 +1,4 @@
 import type { CSSProperties } from "react";
-import { HeroNav } from "./Nav";
 import { HeroVideo } from "./HeroVideo";
 import { Icon, Roll } from "./ui";
 
@@ -7,7 +6,7 @@ const delay = (d: string) => ({ "--d": d }) as CSSProperties;
 
 /**
  * Hero from the Figma frame "Hero Section" (1440 x 1237): a 1408 x 1205 card with a
- * looping background video, the nav on top, a centred text block, and a dark fade for readability.
+ * looping background video, a centred text block, and a dark fade for readability.
  */
 export function Hero() {
   return (
@@ -15,8 +14,6 @@ export function Hero() {
       <HeroVideo />
       <div className="hero2-soften" aria-hidden="true" />
       <div className="hero2-shade" aria-hidden="true" />
-
-      <HeroNav />
 
       <div className="hero2-copy">
         <span className="hero2-chip fade-up" style={delay(".05s")}>
