@@ -21,7 +21,7 @@ export function Footer() {
         <div className="ft-cols">
           <div className="ft-brand">
             <Image src="/footer/logo.svg" width={84} height={43} alt="AML Consumer Care Ltd" />
-            <p>Toothpaste and personal care from Dhaka, Halal certified, now in cosmetic shops and super shops across Bangladesh.</p>
+            <p>Malaysian toothpaste and personal care, Halal certified, now in cosmetic shops and super shops across Bangladesh.</p>
             <a className="ft-btn" href="/#contact">
               <Roll>Ask a question</Roll>
               <span className="arrow"><Icon id="i-arrow" /></span>
@@ -36,7 +36,7 @@ export function Footer() {
           </div>
 
           <div className="ft-col">
-            <h4>Group headquarters</h4>
+            <h4>Headquarters</h4>
             <ul className="ft-addr">
               <Item icon="location">
                 {CONTACT.address.map((l, i) => <span key={l}>{l}{i < CONTACT.address.length - 1 && <br />}</span>)}
@@ -55,8 +55,8 @@ export function Footer() {
         </div>
 
         <div className="ft-bar">
-          <span>© {new Date().getFullYear()} AML Consumer Care Ltd, Dhaka. All rights reserved.</span>
-          <span>Design &amp; Developed by Opseek.agency</span>
+          <span>© {new Date().getFullYear()} AmLion Group Sdn Bhd. All rights reserved.</span>
+          <span>Design &amp; Developed by Opseek agency</span>
         </div>
       </div>
 

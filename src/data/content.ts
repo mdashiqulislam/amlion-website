@@ -70,6 +70,6 @@ export const CONTACT = {
   phone: "+603-6156 5810",
   email: "enquiries@amlion.com.my",
   hours: "Mon to Fri, 8.30am to 5.30pm (MYT)",
-  entities: ["AML Consumer Care Ltd, Dhaka, Bangladesh", "AmLion Toothpaste Mfg. Sdn Bhd", "AmLion Personal Care Mfg. Sdn Bhd", "AmLion Retail Connection Sdn Bhd"],
+  entities: ["AmLion Toothpaste Mfg. Sdn Bhd", "AmLion Personal Care Mfg. Sdn Bhd", "AmLion Retail Connection Sdn Bhd"],
   address: ["Lot 4, Gate 4, Jalan Teknologi 3/4,", "Taman Sains Selangor, Kota Damansara,", "47810 Petaling Jaya,", "Selangor Darul Ehsan, Malaysia"],
 };
