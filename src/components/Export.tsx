@@ -71,7 +71,7 @@ function MapCard() {
             );
           })}
           <circle className="hq" cx={hx} cy={hy} r="9" />
-          <circle cx={hx} cy={hy} r="4" fill="#D6FD70" />
+          <circle cx={hx} cy={hy} r="4" fill="#8BB552" />
           <text x={hx + 12} y={hy + 22} fontFamily="var(--font-dm-mono), monospace" fontSize="13" fill="#0A2240">HQ · SELANGOR</text>
         </svg>
       </div>
