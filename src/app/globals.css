@@ -540,7 +540,7 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 }
 .hero3-slide {
   position: relative; isolation: isolate; flex: 0 0 100%; scroll-snap-align: start; /* 100% of the track's content box, i.e. minus its side padding */
-  height: 572px; border-radius: 24px; overflow: hidden; background: #031F18;
+  height: 572px; border-radius: 24px; overflow: hidden; background: var(--slide-bg, #031F18); /* --slide-bg: each photo's own dark tone, set in Hero.tsx */
 }
 .hero3-img { object-fit: cover; object-position: 100% 50%; z-index: 0; user-select: none; -webkit-user-drag: none; }
 .hero3-copy {
@@ -583,7 +583,7 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
   /* Text on top, photo as a strip along the bottom, so the face and the bottle stay visible */
   .hero3-slide { flex-basis: calc(100% - 12px); height: auto; }
   .hero3-img { top: auto !important; bottom: 0 !important; height: 300px !important; object-position: 80% 40%; } /* next/image sets inset and height inline */
-  .hero3-slide::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 300px; z-index: 0; background: linear-gradient(180deg, #031F18 0%, rgba(3, 31, 24, 0) 45%); }
+  .hero3-slide::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 300px; z-index: 0; background: linear-gradient(180deg, var(--slide-bg, #031F18) 0%, transparent 45%); }
   .hero3-copy { position: relative; inset: auto; justify-content: flex-start; padding: 36px 22px 316px; }
   .hero3-btn { margin-top: 28px; }
   .hero3-title { font-size: clamp(26px, 7.4vw, 40px); }

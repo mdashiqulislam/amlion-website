@@ -4,9 +4,14 @@ import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Icon, Roll } from "./ui";
 
-/** Slides of the hero carousel. The Figma frame "Version #2" shows five dots and repeats the first slide as a placeholder, so the other four copy it until their content is supplied. */
-const FIRST = { image: "/hero/slide-1.webp", alt: "A technician in a hair net and safety glasses inspects a green liquid soap bottle on a production line" };
-const SLIDES = [FIRST, FIRST, FIRST, FIRST, FIRST];
+/**
+ * Slides of the hero carousel. Slide 1 is the Figma "Banner" (196:381), slide 2 the earlier Version #2 photo.
+ * The design shows five dots, so slides 3 to 5 repeat slide 1 until their content is supplied.
+ * `bg` is the photo's own dark tone: it fills the text area on phones, where the photo becomes a strip below the text.
+ */
+const TUBE = { image: "/hero/slide-tube.webp", bg: "#111A13", alt: "A smiling technician in a hair net and safety glasses checks a white toothpaste tube on the production line" };
+const SOAP = { image: "/hero/slide-1.webp", bg: "#031F18", alt: "A technician in a hair net and safety glasses inspects a green liquid soap bottle on a production line" };
+const SLIDES = [TUBE, SOAP, TUBE, TUBE, TUBE];
 const AUTOPLAY_MS = 6500;
 
 /**
@@ -125,7 +130,7 @@ export function Hero() {
         {SLIDES.map((s, i) => {
           const Title = i === 0 ? "h1" : "h2";
           return (
-            <article key={i} className="hero3-slide" role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${SLIDES.length}`}>
+            <article key={i} className="hero3-slide" style={{ "--slide-bg": s.bg } as React.CSSProperties} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${SLIDES.length}`}>
               <Image className="hero3-img" src={s.image} alt={s.alt} fill priority={i === 0} sizes="(max-width: 720px) 100vw, 1352px" />
               <div className="hero3-copy">
                 <Title className="hero3-title">
