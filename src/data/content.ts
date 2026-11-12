@@ -1,9 +1,10 @@
 export const NAV_LINKS = [
+  { href: "/", label: "Home" },
   { href: "/about", label: "About" },
   { href: "/products", label: "Products" },
   { href: "/career", label: "Career" },
-  { href: "/#contact", label: "Contact us" },
   { href: "/#news", label: "News & Media" },
+  { href: "/#contact", label: "Contact us" },
 ] as const;
 
 export type Country = { name: string; code: string; lat: number; lon: number };
