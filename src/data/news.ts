@@ -78,7 +78,7 @@ export const POSTS: Post[] = [
         text: "See what is in each pack before you shop, or send us a question.",
         actions: [
           { href: "/products", label: "Browse products", primary: true },
-          { href: "/#contact", label: "Ask a question" },
+          { href: "/contact", label: "Ask a question" },
         ],
       },
     ],

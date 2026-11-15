@@ -52,7 +52,9 @@ function QuestionForm() {
   );
 }
 
-export function Ask() {
+/** The contact block: on the landing page as a section (h2), and at the top of /contact as the page heading (h1). */
+export function Ask({ asPageHeading = false }: { asPageHeading?: boolean }) {
+  const Heading = asPageHeading ? "h1" : "h2";
   return (
     <section className="block" id="contact">
       <div className="wrap sky cta">
@@ -61,7 +63,7 @@ export function Ask() {
           <Puff css="width:560px;height:200px;left:-200px;bottom:-120px" />
         </div>
         <div className="copy reveal">
-          <h2 className="h2">Got a question about AML?</h2>
+          <Heading className="h2">Got a question about AML?</Heading>
           <p>Ask about a product, check a pack, or find out where to buy. A member of the AML team will reply.</p>
           <div className="direct">
             <span className="pill"><i><Icon id="i-phone" size={14} /></i>{CONTACT.phone}</span>

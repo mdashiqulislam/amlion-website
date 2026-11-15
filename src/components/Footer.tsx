@@ -22,7 +22,7 @@ export function Footer() {
           <div className="ft-brand">
             <Image src="/footer/logo.svg" width={121} height={46} alt="AML Consumer Care Ltd" />
             <p>Malaysian toothpaste and personal care, Halal certified, now in cosmetic shops and super shops across Bangladesh.</p>
-            <a className="ft-btn" href="/#contact">
+            <a className="ft-btn" href="/contact">
               <Roll>Ask a question</Roll>
               <span className="arrow"><Icon id="i-arrow" /></span>
             </a>

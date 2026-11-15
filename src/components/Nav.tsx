@@ -45,7 +45,7 @@ export function FloatNav() {
           ))}
         </div>
         <div className="float-actions">
-          <Link className="btn btn-lime" href="/#contact"><Roll>Request a quote</Roll></Link>
+          <Link className="btn btn-lime" href="/contact"><Roll>Request a quote</Roll></Link>
           <button className="burger float-burger" aria-label="Menu" aria-expanded={open} aria-controls="fmenu" onClick={() => setOpen((o) => !o)}>
             <svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 7h16M3 15h16" stroke="currentColor" strokeWidth="2" strokeLinecap="round" /></svg>
           </button>
@@ -60,7 +60,7 @@ export function FloatNav() {
 
 export function WhatsApp() {
   return (
-    <a className="wa" href="/#contact" aria-label="Ask us on WhatsApp">
+    <a className="wa" href="/contact" aria-label="Ask us on WhatsApp">
       <i><Icon id="i-wa" size={20} /></i>
       <span>Ask us</span>
     </a>
