@@ -4,18 +4,18 @@ import type { NewsItem } from "./consumer";
 export const COVERS: Record<NewsItem["cover"], { src: string; alt: string; pos: string }> = {
   arrival: {
     src: "/news/arrival.webp",
-    alt: "Ziya Enamel Protect toothpaste and Syawo body wash on a shop shelf in a store",
-    pos: "50% 60%",
+    alt: "The Ziya and SYAWO range, from toothpaste to body wash, olive oil and body mist, on a mossy stand in a forest",
+    pos: "50% 55%",
   },
   event: {
     src: "/news/event.webp",
-    alt: "The AML Consumer Care Ltd exhibition stand with Ziya and Syawo products on display",
-    pos: "50% 58%",
+    alt: "The AML Consumer Care Ltd team standing together under the AML logo",
+    pos: "50% 45%",
   },
   halal: {
     src: "/news/halal.webp",
-    alt: "Syawo and Ziya personal care products beside a green Halal mark",
-    pos: "50% 62%",
+    alt: "A gold Halal certified seal on a dark green background",
+    pos: "50% 50%",
   },
 };
 

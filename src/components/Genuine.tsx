@@ -30,7 +30,7 @@ export function Genuine() {
     <section className="block" id="genuine">
       <div className="wrap">
         <div className="sec-head reveal">
-          <h2 className="h2" style={{ maxWidth: "15em" }}>How to spot a genuine <span className="soft">AML pack</span></h2>
+          <h2 className="h2" style={{ maxWidth: "15em" }}>How to spot genuine product <span className="soft">of AML</span></h2>
           <p className="lede center">Four quick checks before you buy. Tap a check to see exactly where to look on the pack.</p>
         </div>
 

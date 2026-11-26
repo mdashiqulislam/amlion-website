@@ -31,6 +31,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
     ["Location", `${job.location} · ${job.mode}`],
     ["Employment type", job.type],
     ["Experience", job.experience],
+    ...(job.salary ? [["Salary range", job.salary] as [string, string]] : []),
     ["Education", job.education],
     ["Posted", job.posted],
     ["Apply by", job.deadline],
@@ -107,7 +108,7 @@ export default async function JobPage({ params }: { params: Promise<{ slug: stri
 
             <nav className="job-more" aria-label="More roles">
               <Link href="/career#roles" className="btn btn-line">All open roles</Link>
-              <Link href={`/career/${next.slug}`} className="job-next"><small>Next role</small><span>{next.title}</span></Link>
+              {next !== job && <Link href={`/career/${next.slug}`} className="job-next"><small>Next role</small><span>{next.title}</span></Link>}
             </nav>
           </div>
         </main>

@@ -9,14 +9,14 @@ import { Icon, Label, Roll } from "./ui";
 
 /** The eight products shown in the landing page scroller, mixing every category. */
 const FEATURED_IDS = [
-  "ziya-enamel-protect-toothpaste",
-  "ziya-radiant-fresh-toothpaste",
-  "syawo-body-wash-rich-moisturising",
-  "ziya-olive-oil",
-  "syawo-perfume-mist-cologne-summer",
-  "ziya-sensitive-instant-relief-toothpaste",
-  "ziya-petroleum-jelly-coco-butter",
-  "syawo-shower-rich-whitening",
+  "ziya-advanced-whitening-toothpaste",
+  "ziya-sensitive-care-toothpaste",
+  "ziya-cooling-menthol-oral-spray",
+  "syawo-body-wash-rich-moisturizing",
+  "ziya-intensive-care-olive-oil",
+  "syawo-body-mist-sensual",
+  "ziya-original-petroleum-jelly",
+  "ziya-enamel-repair-toothpaste",
 ];
 const FEATURED = FEATURED_IDS.map((id) => PRODUCTS.find((p) => p.id === id)!).filter(Boolean);
 
@@ -54,11 +54,17 @@ function Drawer({ product, onClose }: { product: Product; onClose: () => void })
           <div><dt>Category</dt><dd>{product.category}</dd></div>
           <div><dt>Variant</dt><dd>{product.variant}</dd></div>
           <div><dt>Pack size</dt><dd>{product.size}</dd></div>
-          {product.claims.length > 0 && (
-            <div><dt>On the pack</dt><dd><ul className="claims">{product.claims.map((c) => <li key={c}>{c}</li>)}</ul></dd></div>
+          {product.details.length > 0 && (
+            <div className="specs-details">
+              <dt>Details</dt>
+              <dd>
+                <ul className="claims">
+                  {product.details.map((c) => <li key={c}><i aria-hidden="true"><Icon id="i-check" size={12} /></i>{c}</li>)}
+                </ul>
+              </dd>
+            </div>
           )}
         </dl>
-        <p className="sample-note">Details are read from the pack. Ingredients and directions will come from AML.</p>
       </aside>
     </div>
   );
@@ -89,7 +95,7 @@ export function Products() {
         <div className="pr-head">
           <div>
             <h2 className="h2" id="products-h" style={{ maxWidth: "14em" }}>Care for every day, <span className="soft">for the whole family</span></h2>
-            <p className="lede">See what is in each pack before you shop. AML is sold in cosmetic shops and super shops, not on this website.</p>
+            <p className="lede">Know before you buy. Browse our products here, and pick them up at cosmetic and super shops near you.</p>
           </div>
           <Link className="btn btn-dark" href="/products"><Roll>See all</Roll><span className="arrow"><Icon id="i-arrow" /></span></Link>
         </div>

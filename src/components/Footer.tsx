@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { CONTACT } from "@/data/content";
-import { Icon, Roll } from "./ui";
+import { AskButton } from "./Contact";
 
 const tel = CONTACT.phone.replace(/[^+\d]/g, "");
 
@@ -21,11 +21,8 @@ export function Footer() {
         <div className="ft-cols">
           <div className="ft-brand">
             <Image src="/footer/logo.svg" width={121} height={46} alt="AML Consumer Care Ltd" />
-            <p>Malaysian toothpaste and personal care, Halal certified, now in cosmetic shops and super shops across Bangladesh.</p>
-            <a className="ft-btn" href="/contact">
-              <Roll>Ask a question</Roll>
-              <span className="arrow"><Icon id="i-arrow" /></span>
-            </a>
+            <p>Part of AMLION Group Malaysia, AML Consumer Care Ltd. brings over 32 years of global oral and personal care expertise to Bangladesh, with HALAL-certified quality you can trust.</p>
+            <AskButton className="ft-btn" />
           </div>
 
           <div className="ft-col">
@@ -55,7 +52,7 @@ export function Footer() {
         </div>
 
         <div className="ft-bar">
-          <span>© {new Date().getFullYear()} AmLion Group Sdn Bhd. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} AML Consumer Care Ltd. All rights reserved.</span>
           <span>Design &amp; Developed by Opseek agency</span>
         </div>
       </div>

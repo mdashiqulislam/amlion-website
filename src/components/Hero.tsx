@@ -5,13 +5,22 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { Icon, Roll } from "./ui";
 
 /**
- * Slides of the hero carousel. Slide 1 is the Figma "Banner" (196:381), slide 2 the earlier Version #2 photo.
- * The design shows five dots, so slides 3 to 5 repeat slide 1 until their content is supplied.
- * `bg` is the photo's own dark tone: it fills the text area on phones, where the photo becomes a strip below the text.
+ * Slides of the hero carousel, in the client's order (Feedback/Banner/Directions.docx): the main product line-up banner
+ * carries the headline and button; banners 1 to 7 already have their copy and branding in the artwork, so they show as is.
+ * `bg` is the photo's own tone: it fills the text area on phones, where the photo becomes a strip below the text.
  */
-const TUBE = { image: "/hero/slide-tube.webp", bg: "#111A13", alt: "A smiling technician in a hair net and safety glasses checks a white toothpaste tube on the production line" };
-const SOAP = { image: "/hero/slide-1.webp", bg: "#031F18", alt: "A technician in a hair net and safety glasses inspects a green liquid soap bottle on a production line" };
-const SLIDES = [TUBE, SOAP, TUBE, TUBE, TUBE];
+/** `cap` is a short caption shown only on phones, where the banner artwork is too small to read. */
+type Slide = { image: string; alt: string; bg: string; copy?: boolean; cap?: { brand: string; title: string; line: string } };
+const SLIDES: Slide[] = [
+  { image: "/hero/banner-main.webp", bg: "#0E4C8F", copy: true, alt: "The full ZIYA and SYAWO range, from body mists and body washes to petroleum jelly, olive oil, toothpaste and oral spray, lined up on a stone ledge under a blue sky" },
+  { image: "/hero/banner-1.webp", bg: "#7C84A8", cap: { brand: "ZIYA · Toothpaste", title: "Whitening+ Advanced", line: "For a brighter, whiter smile." }, alt: "ZIYA Whitening+ Advanced toothpaste: a brighter, whiter smile. Halal certified, made in Malaysia" },
+  { image: "/hero/banner-2.webp", bg: "#CBA09C", cap: { brand: "ZIYA · Toothpaste", title: "Sensitive+ Care", line: "Gentle care for sensitive teeth." }, alt: "ZIYA Sensitive+ Care toothpaste: perfect care for sensitive teeth. Halal certified, made in Malaysia" },
+  { image: "/hero/banner-3.webp", bg: "#CDE3E7", cap: { brand: "ZIYA · Toothpaste", title: "Everyday family care", line: "Enamel Repair, Radiant Fresh and Natural Clean." }, alt: "ZIYA regular toothpaste for everyday family care, in Enamel Repair, Radiant Fresh and Natural Clean. Halal certified, made in Malaysia" },
+  { image: "/hero/banner-4.webp", bg: "#DCE0D5", cap: { brand: "ZIYA · Oral spray", title: "ZIYA Oral Spray", line: "Cooling Menthol, Honey Fresh and Kids." }, alt: "ZIYA Oral Spray in Cooling Menthol, Honey Fresh and Kids: a fresh feeling for your mouth. Halal certified, made in Malaysia" },
+  { image: "/hero/banner-5.webp", bg: "#E2D1BC", cap: { brand: "ZIYA · Olive oil", title: "Premium Spanish Olive Oil", line: "Softness for face, body and hair." }, alt: "ZIYA Premium Spanish Olive Oil for face, body and hair: softness in every drop. Halal certified, made in Malaysia" },
+  { image: "/hero/banner-6.webp", bg: "#E8DDD5", cap: { brand: "SYAWO · Body wash", title: "SYAWO Body Wash", line: "Cleanse. Nourish. Refresh." }, alt: "SYAWO Body Wash in four Korean-inspired scents: cleanse, nourish, refresh. Halal certified, made in Malaysia" },
+  { image: "/hero/banner-7.webp", bg: "#E3C8B6", cap: { brand: "SYAWO · Body mist", title: "SYAWO Body Mist", line: "New vibes, different personality." }, alt: "SYAWO Body Mist in four scents: new vibes, different personality. Halal certified, made in Malaysia" },
+];
 const AUTOPLAY_MS = 6500;
 
 /**
@@ -127,28 +136,47 @@ export function Hero() {
         onClickCapture={onClickCapture}
         onDragStart={(e) => e.preventDefault()}
       >
-        {SLIDES.map((s, i) => {
-          const Title = i === 0 ? "h1" : "h2";
-          return (
-            <article key={i} className="hero3-slide" style={{ "--slide-bg": s.bg } as React.CSSProperties} role="group" aria-roledescription="slide" aria-label={`${i + 1} of ${SLIDES.length}`}>
-              <Image className="hero3-img" src={s.image} alt={s.alt} fill priority={i === 0} sizes="(max-width: 720px) 100vw, 1352px" />
+        {SLIDES.map((s, i) => (
+          <article
+            key={s.image}
+            className={s.copy ? "hero3-slide hero3-slide--copy" : "hero3-slide hero3-slide--banner"}
+            style={{ "--slide-bg": s.bg } as React.CSSProperties}
+            role="group"
+            aria-roledescription="slide"
+            aria-label={`${i + 1} of ${SLIDES.length}`}
+          >
+            {/* Banners keep their whole artwork (their copy is part of it): a blurred copy fills any space around it. */}
+            {!s.copy && <Image className="hero3-backdrop" src={s.image} alt="" aria-hidden="true" fill sizes="(max-width: 720px) 100vw, 1352px" />}
+            <Image className="hero3-img" src={s.image} alt={s.alt} fill priority={i === 0} sizes="(max-width: 720px) 100vw, 1352px" />
+            {s.copy && (
               <div className="hero3-copy">
-                <Title className="hero3-title">
-                  AML IS A<br />
-                  SISTER CONCERN<br />
-                  OF <span>AMLION</span>
-                </Title>
+                <h1 className="hero3-title">
+                  AML IS THE<br />
+                  BANGLADESH PART<br />
+                  OF <span>AMLION,</span><br />
+                  <span>MALAYSIA.</span>
+                </h1>
                 <p className="hero3-sub">
-                  AML brings oral and personal care manufacturing experience to businesses across <strong>30+ countries.</strong>
+                  AML brings Amlion&rsquo;s <strong>32+ years</strong> of oral and personal care expertise to families across Bangladesh.
                 </p>
                 <a className="hero3-btn" href="#products" tabIndex={i === active ? 0 : -1}>
                   <Roll>Explore Products</Roll>
                   <span className="arrow"><Icon id="i-arrow" /></span>
                 </a>
               </div>
-            </article>
-          );
-        })}
+            )}
+            {s.cap && (
+              <div className="hero3-cap">
+                <p className="hero3-cap-brand">{s.cap.brand}</p>
+                <p className="hero3-cap-title">{s.cap.title}</p>
+                <p className="hero3-cap-line">{s.cap.line}</p>
+                <a className="hero3-cap-link" href="/products" tabIndex={i === active ? 0 : -1}>
+                  See products <Icon id="i-arrow" size={14} />
+                </a>
+              </div>
+            )}
+          </article>
+        ))}
       </div>
 
       <div className="hero3-dots" role="group" aria-label="Choose slide">

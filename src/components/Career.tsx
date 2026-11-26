@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { JOBS, PERKS, STEPS } from "@/data/careers";
+import { PERKS, STEPS } from "@/data/careers";
 import { Icon, Roll } from "./ui";
 
 /** Hero: purpose, why join, and one clear next step. "Explore open roles" is the primary action, "Send your CV" the secondary. */
@@ -9,17 +9,15 @@ export function CareerHero() {
     <section className="career-hero-wrap" aria-labelledby="career-h1">
       <div className="wrap career-hero">
         <div className="copy">
-          <span className="eyebrow">Careers at AML Consumer Care Ltd</span>
-          <h1 id="career-h1">Build care that <span>families trust</span></h1>
+          <h1 id="career-h1">Your Next Chapter <span>Starts Here.</span></h1>
           <p className="career-lede">
-            We make toothpaste and personal care in Dhaka, sold in cosmetic shops and super shops across Bangladesh.
-            Join a team backed by 15+ years of AML Group know-how.
+            At AML Consumer Care Ltd., part of Amlion Group Malaysia, we create quality care for Bangladeshi families.
+            Join our growing team and build a career with purpose.
           </p>
           <div className="career-actions">
             <a className="btn btn-lime btn-xl" href="#roles"><Roll>Explore open roles</Roll><span className="arrow"><Icon id="i-arrow" /></span></a>
             <Link className="btn btn-glass btn-2nd" href="/career/apply"><Roll>Send your CV</Roll></Link>
           </div>
-          <p className="career-hint"><b>{JOBS.length} open roles</b> in Dhaka and Chattogram. Apply online, no account needed.</p>
         </div>
         <div className="career-photos" aria-hidden="true">
           <figure className="cp a"><Image src="/factory/qc.webp" alt="" fill priority sizes="(max-width: 860px) 60vw, 300px" /></figure>

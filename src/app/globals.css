@@ -424,7 +424,8 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .cchip:hover i, .cchip.on i { background: rgba(255,255,255,.14); color: #FFFFFF; }
 .cchip.bd { background: var(--lime); color: var(--lime-ink); box-shadow: none; }
 .cchip.bd i { background: rgba(255,255,255,.22); color: var(--lime-ink); }
-.map-tip { position: absolute; pointer-events: none; background: var(--ink); color: #FFFFFF; font-size: 13px; padding: 6px 10px; border-radius: 10px; transform: translate(-50%, -140%); white-space: nowrap; opacity: 0; transition: opacity .15s ease; }
+.map-tip { position: absolute; pointer-events: none; display: flex; align-items: center; gap: 8px; background: var(--ink); color: #FFFFFF; font-size: 13px; padding: 6px 10px; border-radius: 10px; transform: translate(-50%, -140%); white-space: nowrap; opacity: 0; transition: opacity .15s ease; }
+.map-tip img { width: 21px; height: 14px; border-radius: 3px; object-fit: cover; box-shadow: 0 0 0 1px rgba(255, 255, 255, .25); }
 
 /* News */
 .news { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
@@ -541,21 +542,35 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 }
 .hero3-slide {
   position: relative; isolation: isolate; flex: 0 0 100%; scroll-snap-align: start; /* 100% of the track's content box, i.e. minus its side padding */
-  height: 572px; border-radius: 24px; overflow: hidden; background: var(--slide-bg, #031F18); /* --slide-bg: each photo's own dark tone, set in Hero.tsx */
+  container-type: inline-size; /* the headline scales with the card (cqw), so it never runs into the products */
+  /* 572px at 1440 wide, where a 1352 x 572 banner fits exactly; it follows the banner's ratio between 440 and 680px */
+  height: clamp(440px, calc((100vw - 88px) * 572 / 1352), 680px);
+  border-radius: 24px; overflow: hidden; background: var(--slide-bg, #031F18); /* --slide-bg: each photo's own tone, set in Hero.tsx */
 }
-.hero3-img { object-fit: cover; object-position: 100% 50%; z-index: 0; user-select: none; -webkit-user-drag: none; }
+.hero3-img { object-fit: cover; object-position: 50% 50%; z-index: 0; user-select: none; -webkit-user-drag: none; }
+/* Banners 1 to 7 have their copy in the artwork, so they are never cropped: the whole banner shows, over a blurred copy of itself */
+.hero3-slide--banner .hero3-img { object-fit: contain; }
+/* On narrower cards the main banner is cropped: crop from the right so the products move away from the text */
+.hero3-slide--copy .hero3-img { object-position: 0% 50%; }
+.hero3-cap { display: none; } /* phones only, see the 720px query */
+.hero3-backdrop { object-fit: cover; z-index: 0; filter: blur(28px) saturate(1.1); transform: scale(1.15); user-select: none; pointer-events: none; }
+/* The main banner's left side is bright sky: a deep blue wash behind the text keeps it readable, and clears before the products */
+.hero3-slide--copy::after {
+  content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  background: linear-gradient(90deg, rgba(7, 44, 96, .82) 0%, rgba(7, 44, 96, .66) 22%, rgba(7, 44, 96, .26) 34%, rgba(7, 44, 96, 0) 42%);
+}
 .hero3-copy {
   position: absolute; inset: 0; z-index: 1;
   display: flex; flex-direction: column; justify-content: center; align-items: flex-start;
-  padding: 0 clamp(28px, 5vw, 72px);
+  padding: 0 clamp(28px, 5.3cqw, 72px);
 }
 .hero3-title {
   margin: 0; max-width: 600px;
-  font-family: var(--font-jakarta); font-weight: 800; font-size: clamp(40px, 5vw, 72px); line-height: 1.04; letter-spacing: -0.0417em;
+  font-family: var(--font-jakarta); font-weight: 800; font-size: clamp(28px, 3.1cqw, 52px); line-height: 1.06; letter-spacing: -0.0417em;
 }
-.hero3-title span { color: var(--cta); }
-.hero3-sub { margin: 24px 0 0; max-width: 460px; /* Figma: title, 24px, text, 36px, button */ font-family: var(--font-jakarta); font-size: clamp(16px, 1.32vw, 19px); line-height: 1.5; }
-.hero3-sub strong { font-weight: 700; color: var(--cta); }
+.hero3-title span { color: #FFFFFF; }
+.hero3-sub { margin: 24px 0 0; max-width: min(420px, 30cqw); /* Figma: title, 24px, text, 36px, button */ font-family: var(--font-jakarta); font-size: clamp(15px, 1.3cqw, 18px); line-height: 1.5; }
+.hero3-sub strong { font-weight: 700; color: #FFFFFF; }
 .hero3-btn {
   margin-top: 36px;
   display: inline-flex; align-items: center; gap: 12px; height: 56px; padding: 0 6px 0 28px; border-radius: 999px;
@@ -583,12 +598,23 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
   .hero3-track { gap: 12px; }
   /* Text on top, photo as a strip along the bottom, so the face and the bottle stay visible */
   .hero3-slide { flex-basis: calc(100% - 12px); height: auto; }
-  .hero3-img { top: auto !important; bottom: 0 !important; height: 300px !important; object-position: 80% 40%; } /* next/image sets inset and height inline */
-  .hero3-slide::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 300px; z-index: 0; background: linear-gradient(180deg, var(--slide-bg, #031F18) 0%, transparent 45%); }
-  .hero3-copy { position: relative; inset: auto; justify-content: flex-start; padding: 36px 22px 316px; }
+  /* the main banner sits whole along the bottom (its own 1352 x 572 ratio), the text above it on the banner's blue */
+  .hero3-slide--copy .hero3-img { top: auto !important; bottom: 0 !important; height: calc(100cqw * 572 / 1352) !important; } /* next/image sets inset and height inline */
+  .hero3-slide--copy::after { inset: auto 0 0; height: calc(100cqw * 572 / 1352); background: linear-gradient(180deg, var(--slide-bg, #031F18) 0%, transparent 45%); }
+  .hero3-copy { position: relative; inset: auto; justify-content: flex-start; padding: 36px 22px calc(100cqw * 572 / 1352 + 20px); }
   .hero3-btn { margin-top: 28px; }
-  .hero3-title { font-size: clamp(26px, 7.4vw, 40px); }
   .hero3-sub { margin-top: 16px; max-width: none; font-size: 16px; }
+  .hero3-title { font-size: clamp(26px, 7.4cqw, 40px); }
+  /* Banners: the artwork sits whole along the bottom like the main card's photo, with a short caption above it */
+  .hero3-slide--banner { background: var(--surface); }
+  .hero3-slide--banner .hero3-backdrop { display: none; }
+  .hero3-slide--banner .hero3-img { top: auto !important; bottom: 0 !important; height: calc(100cqw * 572 / 1352) !important; object-fit: cover; }
+  .hero3-cap { position: absolute; inset: 0 0 calc(100cqw * 572 / 1352); display: flex; flex-direction: column; align-items: flex-start; padding: 36px 22px 24px; color: var(--ink); }
+  .hero3-cap p { margin: 0; }
+  .hero3-cap-brand { font-family: var(--font-mono); font-size: 12px; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); }
+  .hero3-cap-title { margin-top: 14px !important; font-family: var(--font-display); font-weight: 800; font-size: clamp(26px, 7.4cqw, 40px); line-height: 1.06; letter-spacing: -0.03em; color: var(--navy); }
+  .hero3-cap-line { margin-top: 12px !important; font-size: 16px; line-height: 1.5; color: var(--ink-2); }
+  .hero3-cap-link { margin-top: auto; display: inline-flex; align-items: center; gap: 8px; padding-bottom: 2px; font-size: 15px; font-weight: 600; color: var(--navy); border-bottom: 1.5px solid var(--cta); }
 }
 
 /* ---------- Story tiles ---------- */
@@ -736,8 +762,12 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .pc-body { flex: none; height: 142px; padding: 28px 24px; display: flex; flex-direction: column; gap: 12px; background: var(--surface); }
 .pc-tag { font-family: var(--font-mono); font-weight: 400; font-size: 13px; line-height: 1.2; letter-spacing: 1.54px; text-transform: uppercase; color: #6B7787; }
 .pc-name { font-family: var(--font-display); font-weight: 600; font-size: 22px; line-height: 1.3; color: var(--ink); text-wrap: balance; }
-.claims { list-style: none; margin: 4px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-.claims li { background: var(--surface); border-radius: 999px; padding: 7px 12px; font-size: 13px; }
+/* Drawer details: full width under the specs, each point led by a lime check badge on a hairline rail */
+.specs-list .specs-details { grid-template-columns: 1fr; gap: 14px; padding-top: 16px; }
+.claims { list-style: none; margin: 0; padding: 0; display: grid; gap: 0; position: relative; }
+.claims::before { content: ""; position: absolute; left: 11px; top: 14px; bottom: 14px; width: 1px; background: var(--line); }
+.claims li { position: relative; display: grid; grid-template-columns: 24px 1fr; gap: 14px; align-items: start; padding: 8px 0; font-size: 15px; font-weight: 400; line-height: 1.5; color: var(--ink-2); }
+.claims li i { position: relative; width: 24px; height: 24px; margin-top: -1px; border-radius: 50%; display: grid; place-items: center; background: #EEF5E5; color: #4F7A1E; box-shadow: 0 0 0 4px #FFFFFF; }
 @media (max-width: 1080px) {
   .pgrid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
@@ -845,7 +875,8 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .btn[disabled] { opacity: .7; cursor: progress; }
 .btn-xl { --h: 64px; font-size: 16px; padding-left: 34px; }
 .btn-xl .arrow { width: 52px !important; height: 52px !important; }
-.btn-2nd { --h: 56px; background: transparent; color: #FFFFFF; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.7); }
+/* Secondary hero button: same height, type size and side padding as the .btn-xl primary beside it */
+.btn-2nd { --h: 64px; font-size: 16px; padding: 0 34px; background: transparent; color: #FFFFFF; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.7); }
 .btn-2nd:hover { background: #FFFFFF; color: var(--navy); }
 
 .career-hero {
@@ -860,7 +891,7 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .career-hero h1 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(40px, 5.4vw, 72px); line-height: 1.03; letter-spacing: -0.058em; text-wrap: balance; }
 .career-hero h1 span { color: #8FC2F5; }
 .career-lede { margin: 0; color: rgba(255,255,255,.9); font-size: 19px; line-height: 1.55; max-width: 48ch; }
-.career-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; }
+.career-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 14px; margin-top: 14px; } /* 22px grid gap + 14px = 36px from the paragraph */
 .career-hint { margin: 0; color: rgba(255,255,255,.8); font-size: 15px; }
 .career-hint b { color: #FFFFFF; }
 .career-photos { position: relative; height: 420px; }
@@ -889,10 +920,19 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .search input, .sel select { width: 100%; height: 52px; border-radius: 14px; border: 1.5px solid #C9D3DF; background: #FFFFFF; padding: 0 16px; color: var(--ink); transition: border-color .2s ease, box-shadow .2s ease; }
 .search input { padding-left: 46px; }
 .search input:focus, .sel select:focus { outline: none; border-color: var(--navy); box-shadow: 0 0 0 3px rgba(28,155,215,.35); }
+/* Own chevron instead of the browser's, so it sits 18px in from the edge like the search icon sits 16px in on the left */
+.sel select {
+  appearance: none; -webkit-appearance: none; cursor: pointer; padding-right: 48px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14'%3E%3Cpath d='M3 5.25L7 9.25L11 5.25' fill='none' stroke='%233A4859' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 18px center; background-size: 14px;
+}
+.sel select:hover { border-color: #A9B6C6; }
 .depts { display: flex; flex-wrap: wrap; gap: 8px; }
 .depts button { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; border: 0; cursor: pointer; padding: 0 16px; border-radius: 999px; background: var(--surface); color: var(--ink); font-weight: 600; font-size: 15px; box-shadow: inset 0 0 0 1px #D5DDE7; transition: background-color .2s ease, color .2s ease; }
 .depts button:hover:not([disabled]) { background: #E4EAF2; }
 .depts button.on { background: var(--navy); color: #FFFFFF; box-shadow: none; }
+/* The selected chip keeps its navy on hover, one step lighter, so the white label stays readable */
+.depts button.on:hover:not([disabled]) { background: var(--navy-2); }
 .depts button[disabled] { opacity: .5; cursor: not-allowed; }
 .depts .n { font-family: var(--font-mono); font-size: 12px; padding: 2px 8px; border-radius: 999px; background: rgba(15,28,46,.1); }
 .depts .on .n { background: rgba(255,255,255,.22); }
@@ -904,6 +944,7 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 
 /* Job cards */
 .jgrid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.jc-deadline { font-size: 15px; color: var(--ink); }
 .jc { position: relative; background: var(--surface); border-radius: var(--radius-l); padding: 26px; display: flex; flex-direction: column; gap: 12px; transition: transform .3s ease, background-color .25s ease, box-shadow .25s ease; }
 .jc:hover, .jc:focus-within { transform: translateY(-3px); background: #FFFFFF; box-shadow: inset 0 0 0 2px var(--navy), 0 24px 40px -28px rgba(10,34,64,.4); }
 .jc-top { display: flex; justify-content: space-between; gap: 10px; align-items: center; }
@@ -926,6 +967,8 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .jc-go { display: inline-flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; white-space: nowrap; }
 .jc-go i { width: 40px; height: 40px; border-radius: 50%; background: var(--ink); color: #FFFFFF; display: grid; place-items: center; transition: transform .3s ease, background-color .25s ease, color .25s ease; }
 .jc:hover .jc-go i, .jc:focus-within .jc-go i { background: var(--lime); color: var(--lime-ink); transform: rotate(45deg); }
+.jmore { display: grid; justify-items: center; gap: 10px; margin-top: 28px; }
+.jmore span { font-size: 14px; color: #4A5766; }
 .jempty { text-align: center; background: var(--surface); border-radius: var(--radius-l); padding: 48px 20px; display: grid; gap: 10px; justify-items: center; }
 .jempty h3 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: 26px; letter-spacing: -0.04em; }
 .jempty p { margin: 0; color: #4A5766; max-width: 46ch; }
@@ -1062,6 +1105,7 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
   .career-actions .btn { width: 100%; justify-content: space-between; }
   .career-actions .btn-xl { --h: 60px; font-size: 13px; letter-spacing: .12em; padding-left: 24px; }
   .career-actions .btn-xl .arrow { width: 48px !important; height: 48px !important; }
+  .career-actions .btn-2nd { --h: 60px; font-size: 13px; letter-spacing: .12em; padding: 0 24px; }
   .cv-band .btn { width: 100%; justify-content: space-between; }
   .job-facts div { grid-template-columns: 110px 1fr; }
   .job-more { flex-direction: column; align-items: stretch; }
@@ -1080,11 +1124,12 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .ab-facts span { color: #4A5766; font-size: 15px; }
 .ab-mv { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 .mv { border-radius: var(--radius-xl); padding: clamp(28px, 4vw, 52px); display: grid; gap: 18px; align-content: start; min-height: 300px; }
-.mv p { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(24px, 2.6vw, 34px); line-height: 1.2; letter-spacing: -0.04em; text-wrap: balance; }
+.mv h2 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(30px, 3.4vw, 44px); line-height: 1.1; letter-spacing: -0.04em; }
+.mv p { margin: 0; font-size: clamp(16px, 1.3vw, 18px); line-height: 1.6; max-width: 34em; }
 .mv.mission { background: var(--navy); color: #FFFFFF; }
-.mv.mission .label { color: rgba(255,255,255,.75); }
+.mv.mission p { color: rgba(255, 255, 255, .8); }
 .mv.vision { background: var(--lime); color: var(--lime-ink); }
-.mv.vision .label { color: var(--lime-ink); }
+.mv.vision p { color: var(--lime-ink); }
 .ab-belief { text-align: center; display: grid; gap: 20px; justify-items: center; background: linear-gradient(180deg, #EAF4FD, #FFFFFF); border-radius: var(--radius-xl); padding: clamp(40px, 6vw, 88px) clamp(20px, 4vw, 56px); }
 .ab-belief h2 { margin: 0; font-family: var(--font-display); font-weight: 500; font-size: clamp(40px, 6.5vw, 88px); line-height: 1; letter-spacing: -0.06em; color: var(--navy); text-wrap: balance; }
 .ab-belief > p { margin: 0; font-size: 19px; color: #33404F; max-width: 54ch; }
@@ -1095,6 +1140,7 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .people { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
 .people.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 .people.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.people.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 640px; margin-inline: auto; }
 .person h3 { margin: 14px 0 0; font-family: var(--font-display); font-weight: 600; font-size: 20px; letter-spacing: -0.03em; }
 .person p { margin: 2px 0 0; color: #4A5766; font-size: 15px; }
 .person-photo { position: relative; aspect-ratio: 4 / 5; border-radius: var(--radius-l); overflow: hidden; background: var(--surface); }
@@ -1241,9 +1287,9 @@ section.block { padding-block: clamp(80px, 10vw, 136px) 0; }
 .reach-line-text small { font-size: 14px; color: rgba(255, 255, 255, .64); }
 .reach-line-text strong { font-family: var(--font-display); font-size: clamp(22px, 2.5vw, 34px); font-weight: 600; line-height: 1.15; letter-spacing: -.02em; overflow-wrap: anywhere; transition: color .3s ease; }
 .reach-line .arrow { width: 48px; height: 48px; border-radius: 50%; display: grid; place-items: center; background: #FFFFFF; color: var(--cta-arrow); transition: transform .35s ease, background .3s ease; }
-.reach-line:hover strong { color: var(--cta); }
-.reach-line:hover .reach-ic { background: var(--cta); color: var(--navy); }
-.reach-line:hover .arrow { transform: rotate(45deg); background: var(--cta); }
+a.reach-line:hover strong { color: var(--cta); }
+a.reach-line:hover .reach-ic { background: var(--cta); color: var(--navy); }
+a.reach-line:hover .arrow { transform: rotate(45deg); background: var(--cta); }
 .reach-line:focus-visible { outline: 2px solid var(--cta); outline-offset: 4px; border-radius: 12px; }
 
 .reach-hours { margin: auto 0 0; padding-top: 24px; min-height: 0; border-top: 1px solid rgba(255, 255, 255, .12); display: grid; gap: 6px; font-size: 16px; color: rgba(255, 255, 255, .8); }

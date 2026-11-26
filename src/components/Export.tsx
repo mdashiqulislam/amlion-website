@@ -8,7 +8,7 @@ const W = 1000, H = 375, LAT0 = 75, LAT1 = -60;
 const px = (lon: number) => ((lon + 180) / 360) * W;
 const py = (lat: number) => ((LAT0 - lat) / (LAT0 - LAT1)) * H;
 
-type Tip = { name: string; x: number; y: number } | null;
+type Tip = { name: string; code: string; x: number; y: number } | null;
 
 function MapCard() {
   const cardRef = useRef<HTMLDivElement>(null);
@@ -35,7 +35,7 @@ function MapCard() {
     const c = COUNTRIES.find((x) => x.code === code);
     if (!card || !pin || !c) return;
     const r = pin.getBoundingClientRect(), cr = card.getBoundingClientRect();
-    setTip({ name: c.name, x: r.left + r.width / 2 - cr.left, y: r.top - cr.top });
+    setTip({ name: c.name, code: c.code, x: r.left + r.width / 2 - cr.left, y: r.top - cr.top });
   };
 
   return (
@@ -76,7 +76,10 @@ function MapCard() {
         </svg>
       </div>
 
-      <div className="map-tip" style={tip ? { left: tip.x, top: tip.y, opacity: 1 } : undefined}>{tip?.name}</div>
+      <div className="map-tip" style={tip ? { left: tip.x, top: tip.y, opacity: 1 } : undefined}>
+        {tip && <img src={`/flags/${tip.code}.svg`} width={21} height={14} alt="" />}
+        {tip?.name}
+      </div>
 
     </div>
   );
@@ -90,7 +93,7 @@ export function ExportMarket() {
           <div style={{ display: "grid", gap: 18 }}>
             <h2 className="h2" style={{ maxWidth: "13em" }}>Trusted in 30+ countries. <span className="soft">Now in Bangladesh.</span></h2>
           </div>
-          <p className="lede">AML Group products are used in more than 30 countries across 5 continents. Bangladesh is our newest home.</p>
+          <p className="lede">AMLION Group products are used in more than 30 countries across 5 continents. Bangladesh is our newest home.</p>
         </div>
 
         <div className="export-grid">

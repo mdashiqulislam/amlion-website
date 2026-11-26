@@ -1,25 +1,19 @@
 /**
- * About page content. Facts come from the AML website. Anything marked PLACEHOLDER (mission and vision wording,
- * board and leadership profiles) is a draft for the client to confirm or replace.
+ * About page content, from the client's About feedback document.
  */
 
 export const OVERVIEW = {
-  lede: "AML Consumer Care Ltd makes toothpaste and personal care in Dhaka, Bangladesh, for families who want everyday products they can rely on.",
-  body: [
-    "We are part of AML Group, which has made oral and personal care for more than 15 years. Our range covers toothpaste, mouthwash and oral care kits, plus hair, body and skin care for the whole family.",
-    "Our products are sold in cosmetic shops and super shops across Bangladesh, not on this website. Every pack carries the maker's name and address, so you can see who made it.",
-  ],
   facts: [
-    { value: "15+", label: "years of AML Group experience in oral and personal care" },
-    { value: "30+", label: "countries across 5 continents use AML Group products" },
-    { value: "Dhaka", label: "where products sold in Bangladesh are made" },
+    { value: "32+", label: "years of AMLION Group experience in oral and personal care" },
+    { value: "30+", label: "countries across 5 continents use AMLION Group products" },
+    { value: "Malaysia", label: "where products sold in Bangladesh are made" },
     { value: "Halal", label: "certified by JAKIM, with ISO 9001:2015 and GMP in the group" },
   ],
 } as const;
 
-/** PLACEHOLDER wording. The client must approve or replace both statements. */
-export const MISSION = "To make safe, dependable oral and personal care that Bangladeshi families can use with confidence every day.";
-export const VISION = "To be the name families in Bangladesh turn to first for everyday care.";
+/** Mission and vision from the client's About feedback. */
+export const MISSION = "To enrich everyday lives by providing high-quality, innovative and affordable oral and personal care products that promote better hygiene, healthier lifestyles and greater confidence for everyone.";
+export const VISION = "To become one of Bangladesh's most trusted and preferred names in oral and personal care, making quality hygiene products accessible to every household while contributing to a healthier, happier and more confident society.";
 
 export const BELIEF = {
   line: "Trusted Care, Better Life",
@@ -33,26 +27,22 @@ export const BELIEF = {
 
 export type Person = { name: string; role: string; photo?: string };
 
-/**
- * PLACEHOLDER profiles. The portraits are illustrations (public/team/person-XX.svg) and the positions are sample titles.
- * Replace name, role and photo (a 4:5 portrait in /public/team) with the real people when AML confirms them.
- */
-const photo = (n: number) => `/team/person-${String(n).padStart(2, "0")}.svg`;
+/** Board and leading team from the client's About feedback, in the order given. Portraits are 5:6 photos in /public/team. */
+const photo = (slug: string) => `/team/${slug}.webp`;
 
 export const BOARD: Person[] = [
-  { name: "Director name", role: "Chairman", photo: photo(1) },
-  { name: "Director name", role: "Managing Director", photo: photo(2) },
-  { name: "Director name", role: "Director, Finance", photo: photo(3) },
-  { name: "Director name", role: "Director, Operations", photo: photo(4) },
+  { name: "Koek Yee Chuan", role: "Director", photo: photo("koek-yee-chuan") },
+  { name: "Anisur Rahman", role: "Director", photo: photo("anisur-rahman") },
 ];
 
 export const TEAM: Person[] = [
-  { name: "Team member name", role: "Head of Production", photo: photo(5) },
-  { name: "Team member name", role: "Head of Quality Assurance", photo: photo(6) },
-  { name: "Team member name", role: "Head of Sales", photo: photo(7) },
-  { name: "Team member name", role: "Head of Marketing", photo: photo(8) },
-  { name: "Team member name", role: "Head of Supply Chain", photo: photo(9) },
-  { name: "Team member name", role: "Head of Finance", photo: photo(10) },
-  { name: "Team member name", role: "Head of Human Resources", photo: photo(11) },
-  { name: "Team member name", role: "Head of Research & Development", photo: photo(12) },
+  { name: "Anisur Rahman", role: "CEO", photo: photo("anisur-rahman") },
+  { name: "Md. Kamrul Hasan Mehedi", role: "Head of Sales", photo: photo("kamrul-hasan-mehedi") },
+  { name: "Khandakar Nazmul Islam", role: "Accounts & Finance", photo: photo("nazmul-islam") },
+  { name: "Fayjus Salehin", role: "Distribution", photo: photo("fayjus-salehin") },
+  { name: "Md. Shahadat Hossain", role: "Sales & Marketing", photo: photo("shahadat-hossain") },
+  { name: "Md. Fahim Ahmed", role: "HR & Admin", photo: photo("fahim-ahmed") },
+  { name: "Omar Faruk", role: "Accounts", photo: photo("omar-faruk") },
+  { name: "Md. Tawfique Hasan", role: "Branding & Marketing", photo: photo("tawfique-hasan") },
+  { name: "Seba Guda", role: "Administration", photo: photo("seba-guda") },
 ];

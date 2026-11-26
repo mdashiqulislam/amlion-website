@@ -2,17 +2,18 @@
 
 import { useEffect, useState } from "react";
 import { CONTACT } from "@/data/content";
-import { Icon } from "./ui";
+import { Icon, Roll } from "./ui";
+import { useIsPhone } from "./useIsPhone";
 
 const tel = CONTACT.phone.replace(/[^+\d]/g, "");
 const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.address.join(" "))}`;
 const COMPANY_TAGS = ["Oral care", "Personal care", "Retail"];
 
-/** Office hours are Mon to Fri, 8.30am to 5.30pm in Malaysia (UTC+8). */
+/** Office hours are Mon to Fri, 8.30am to 5.30pm in Bangladesh (BST, UTC+6). */
 function isOpenNow(d = new Date()) {
-  const myt = new Date(d.getTime() + (d.getTimezoneOffset() + 480) * 60000);
-  const day = myt.getDay();
-  const mins = myt.getHours() * 60 + myt.getMinutes();
+  const bst = new Date(d.getTime() + (d.getTimezoneOffset() + 360) * 60000);
+  const day = bst.getDay();
+  const mins = bst.getHours() * 60 + bst.getMinutes();
   return day >= 1 && day <= 5 && mins >= 510 && mins < 1050;
 }
 
@@ -34,8 +35,38 @@ function OpenStatus() {
   );
 }
 
+/**
+ * Call and email rows. On phones the whole row is a link with an arrow. On computers it is plain text
+ * (no link, no arrow, no hover), so visitors read or copy the number and email instead.
+ */
+function ReachLine({ href, icon, label, value, phone }: { href: string; icon: string; label: string; value: string; phone: boolean }) {
+  const inner = (
+    <>
+      <span className="reach-ic"><Icon id={icon} size={18} /></span>
+      <span className="reach-line-text">
+        <small>{label}</small>
+        <strong>{value}</strong>
+      </span>
+      {phone && <span className="arrow"><Icon id="i-arrow" /></span>}
+    </>
+  );
+  return phone ? <a className="reach-line" href={href}>{inner}</a> : <div className="reach-line">{inner}</div>;
+}
+
+/** Footer "Ask us" button with the phone number. On phones it calls the number; on computers it opens the question form on /contact. */
+export function AskButton({ className }: { className: string }) {
+  const phone = useIsPhone();
+  return (
+    <a className={className} href={phone ? `tel:${tel}` : "/contact"}>
+      <Roll>{`Ask us: ${CONTACT.phone}`}</Roll>
+      <span className="arrow"><Icon id="i-arrow" /></span>
+    </a>
+  );
+}
+
 /** Every way to reach AML in one place, under the question form on /contact. */
 export function ContactInfo() {
+  const phone = useIsPhone();
   return (
     <section className="block" aria-labelledby="reach-h">
       <div className="wrap">
@@ -54,23 +85,8 @@ export function ContactInfo() {
             </div>
             <p className="reach-big">Real people.<br /><span>Real answers.</span></p>
 
-            <a className="reach-line" href={`tel:${tel}`}>
-              <span className="reach-ic"><Icon id="i-phone" size={18} /></span>
-              <span className="reach-line-text">
-                <small>Call us</small>
-                <strong>{CONTACT.phone}</strong>
-              </span>
-              <span className="arrow"><Icon id="i-arrow" /></span>
-            </a>
-
-            <a className="reach-line" href={`mailto:${CONTACT.email}`}>
-              <span className="reach-ic"><Icon id="i-mail" size={18} /></span>
-              <span className="reach-line-text">
-                <small>Email us</small>
-                <strong>{CONTACT.email}</strong>
-              </span>
-              <span className="arrow"><Icon id="i-arrow" /></span>
-            </a>
+            <ReachLine phone={phone} href={`tel:${tel}`} icon="i-phone" label="Call us" value={CONTACT.phone} />
+            <ReachLine phone={phone} href={`mailto:${CONTACT.email}`} icon="i-mail" label="Email us" value={CONTACT.email} />
 
             <p className="reach-hours">
               <span>Office hours</span>

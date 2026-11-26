@@ -40,7 +40,7 @@ export function News() {
       <div className="wrap">
         <div className="sec-head reveal">
           <h2 className="h2" style={{ maxWidth: "14em" }}>Events and news <span className="soft">from AML</span></h2>
-          <p className="lede center">What is happening at AML and where you can meet us. Sample posts are shown until real ones are added.</p>
+          <p className="lede center">Stay updated with the latest news, campaigns and milestones from AML Consumer Care Ltd.</p>
         </div>
 
         <div className="ngrid">

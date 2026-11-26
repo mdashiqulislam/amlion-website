@@ -6,7 +6,7 @@ import { Sprite } from "@/components/ui";
 
 export const metadata: Metadata = {
   title: "About | AML Consumer Care Ltd",
-  description: "AML Consumer Care Ltd makes toothpaste and personal care in Dhaka. Read about our mission, vision, board of directors and leading team.",
+  description: "AML Consumer Care Ltd., part of AMLION Group Malaysia, brings HALAL-certified oral and personal care to Bangladesh. Read about our mission, vision, board of directors and leading team.",
 };
 
 export default function AboutPage() {

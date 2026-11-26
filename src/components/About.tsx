@@ -9,12 +9,11 @@ export function AboutHero() {
     <section aria-labelledby="about-h1">
       <div className="wrap career-hero about-hero">
         <div className="copy">
-          <span className="eyebrow">About AML Consumer Care Ltd</span>
-          <h1 id="about-h1">Everyday care, <span>made in Dhaka</span></h1>
-          <p className="career-lede">{OVERVIEW.lede}</p>
+          <h1 id="about-h1">Built on Smiles. <span>Grown With Care.</span></h1>
+          <p className="career-lede">Part of AMLION Group Malaysia, AML Consumer Care Ltd. brings over 32 years of global oral and personal care expertise to Bangladesh, with <strong>HALAL-certified</strong> quality you can trust.</p>
         </div>
         <div className="career-photos" aria-hidden="true">
-          <figure className="cp a"><Image src="/about/factory.webp" alt="" fill priority sizes="(max-width: 860px) 60vw, 300px" /></figure>
+          <figure className="cp a"><Image src="/factory/packing.webp" alt="" fill priority sizes="(max-width: 860px) 60vw, 300px" /></figure>
           <figure className="cp b"><Image src="/factory/filling-line.webp" alt="" fill priority sizes="(max-width: 860px) 60vw, 300px" /></figure>
         </div>
       </div>
@@ -29,7 +28,7 @@ export function Overview() {
       <div className="wrap ab-who">
         <div>
           <h2 className="h2" id="who-h">Who we <span className="soft">are</span></h2>
-          {OVERVIEW.body.map((p) => <p key={p} className="ab-p">{p}</p>)}
+          <p className="ab-p"><strong>AML Consumer Care Ltd.</strong> is the Bangladesh arm of AMLION Group Malaysia, a trusted manufacturer of oral and personal care products with more than 32 years of experience. Backed by AMLION&apos;s research and development, <strong>HALAL-certified</strong> and internationally recognized manufacturing standards, and a presence in over 30 countries, we bring quality, safety and innovation to everyday care for Bangladeshi families.</p>
         </div>
         <ul className="ab-facts">
           {OVERVIEW.facts.map((f) => (
@@ -46,11 +45,11 @@ export function MissionVision() {
     <section className="block" id="mission" aria-label="Mission and vision">
       <div className="wrap ab-mv">
         <article className="mv mission">
-          <span className="label">Our mission</span>
+          <h2>Our Mission</h2>
           <p>{MISSION}</p>
         </article>
         <article className="mv vision">
-          <span className="label">Our vision</span>
+          <h2>Our Vision</h2>
           <p>{VISION}</p>
         </article>
       </div>
@@ -84,7 +83,7 @@ function Initials() {
   );
 }
 
-function PeopleGrid({ people, id, title, lede, cols }: { people: Person[]; id: string; title: React.ReactNode; lede: string; cols: 3 | 4 }) {
+function PeopleGrid({ people, id, title, lede, cols }: { people: Person[]; id: string; title: React.ReactNode; lede: string; cols: 2 | 3 | 4 }) {
   return (
     <section className="block" id={id} aria-labelledby={`${id}-h`}>
       <div className="wrap">
@@ -94,7 +93,7 @@ function PeopleGrid({ people, id, title, lede, cols }: { people: Person[]; id: s
         </div>
         <ul className={`people cols-${cols}`}>
           {people.map((p, i) => (
-            <li key={i} className="person">
+            <li key={`${p.name}-${i}`} className="person">
               <div className={`person-photo${p.photo ? "" : " empty"}`}>
                 {p.photo ? <Image src={p.photo} alt={`${p.name}, ${p.role}`} fill sizes="(max-width: 560px) 50vw, 280px" /> : <Initials />}
               </div>
@@ -109,11 +108,11 @@ function PeopleGrid({ people, id, title, lede, cols }: { people: Person[]; id: s
 }
 
 export function Board() {
-  return <PeopleGrid id="board" cols={4} people={BOARD} title={<>Board of <span className="soft">Directors</span></>} lede="The people who guide AML Consumer Care Ltd." />;
+  return <PeopleGrid id="board" cols={2} people={BOARD} title={<>Board of <span className="soft">Directors</span></>} lede="The people who guide AML Consumer Care Ltd." />;
 }
 
 export function LeadingTeam() {
-  return <PeopleGrid id="team" cols={4} people={TEAM} title={<>Our leading <span className="soft">team</span></>} lede="The people who run AML day to day." />;
+  return <PeopleGrid id="team" cols={3} people={TEAM} title={<>Our leading <span className="soft">team</span></>} lede="The people who run AML day to day." />;
 }
 
 export function AboutCta() {
