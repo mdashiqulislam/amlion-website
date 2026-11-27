@@ -5,26 +5,16 @@ import { useState } from "react";
 import { GENUINE_CHECKS } from "@/data/consumer";
 import { Icon, Roll } from "./ui";
 
-type Side = "front" | "back";
-
-/** Both pack images share one 1359 x 1157 frame, so markers and the zoom lens use the same percentages. */
+/** The pack image sits in a 1359 x 1157 frame, so markers and the zoom lens use the same percentages. */
 const W = 1359, H = 1157;
-const SRC: Record<Side, string> = { front: "/genuine/front.webp", back: "/genuine/back.webp" };
-const ALT: Record<Side, string> = {
-  front: "Front of the Ziya Radiant Fresh Toothpaste box and tube",
-  back: "Back of the Ziya Radiant Fresh Toothpaste box and tube with the Halal mark, ingredients, directions and maker details",
-};
+const SRC = "/genuine/spray-front.webp";
+const ALT = "Front of the Ziya Cooling Menthol Oral Spray box and bottle, with the brand name and the Halal mark";
 
-/** Is it genuine? Real front and back pack images with markers on each feature, a zoom lens, and a linked checklist. */
+/** Is it genuine? The real pack image with markers on each feature, a zoom lens, and a linked checklist. */
 export function Genuine() {
   const [active, setActive] = useState(0);
-  const [side, setSide] = useState<Side>(GENUINE_CHECKS[0].side);
   const check = GENUINE_CHECKS[active];
-
-  const pick = (i: number) => {
-    setActive(i);
-    setSide(GENUINE_CHECKS[i].side);
-  };
+  const spot = check.spot;
 
   return (
     <section className="block" id="genuine">
@@ -36,24 +26,16 @@ export function Genuine() {
 
         <div className="genuine">
           <div className="gv reveal">
-            <div className="gv-toggle" role="tablist" aria-label="Pack side">
-              {(["front", "back"] as Side[]).map((s) => (
-                <button key={s} role="tab" aria-selected={side === s} className={side === s ? "on" : ""} onClick={() => setSide(s)}>
-                  {s === "front" ? "Front" : "Back"}
-                </button>
-              ))}
-            </div>
-
             <div className="gv-stage">
               <div className="gv-art">
-                <Image src={SRC[side]} width={W} height={H} alt={ALT[side]} priority unoptimized draggable={false} />
+                <Image src={SRC} width={W} height={H} alt={ALT} priority unoptimized draggable={false} />
               </div>
-              {GENUINE_CHECKS.map((c, i) => c.side === side && (
+              {GENUINE_CHECKS.map((c, i) => c.spot && (
                 <button
                   key={c.title}
                   className={`gv-pin${active === i ? " on" : ""}`}
-                  style={{ left: `${c.x}%`, top: `${c.y}%` }}
-                  onClick={() => pick(i)}
+                  style={{ left: `${c.spot.x}%`, top: `${c.spot.y}%` }}
+                  onClick={() => setActive(i)}
                   aria-label={`Check ${i + 1}: ${c.title}`}
                 >
                   {i + 1}
@@ -61,34 +43,33 @@ export function Genuine() {
               ))}
             </div>
 
-            {check.side === side && (
-              <div className={`gv-lens${check.y < 50 ? " low" : ""}`} aria-hidden="true">
+            {spot && (
+              <div className={`gv-lens${spot.y < 50 ? " low" : ""}`} aria-hidden="true">
                 <div
                   className="gv-lens-art"
                   style={{
-                    width: check.zoom,
-                    height: check.zoom * (H / W),
-                    left: `calc(50% - ${((check.zx ?? check.x) / 100) * check.zoom}px)`,
-                    top: `calc(50% - ${((check.zy ?? check.y) / 100) * check.zoom * (H / W)}px)`,
+                    width: spot.zoom,
+                    height: spot.zoom * (H / W),
+                    left: `calc(50% - ${(spot.x / 100) * spot.zoom}px)`,
+                    top: `calc(50% - ${(spot.y / 100) * spot.zoom * (H / W)}px)`,
                   }}
                 >
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={SRC[side]} width={W} height={H} alt="" draggable={false} />
+                  <img src={SRC} width={W} height={H} alt="" draggable={false} />
                 </div>
                 <span className="gv-lens-label">{active + 1}. {check.title}</span>
               </div>
             )}
 
-            <p className="gv-note">Ziya Radiant Fresh Toothpaste, 100 g. Front and back of the box and tube.</p>
+            <p className="gv-note">Ziya Cooling Menthol Oral Spray, 15 ml. Front of the box and bottle.</p>
           </div>
 
           <ol className="checks reveal">
             {GENUINE_CHECKS.map((c, i) => (
               <li key={c.title} className={`check${active === i ? " on" : ""}`}>
-                <button className="check-btn" onClick={() => pick(i)} aria-pressed={active === i}>
+                <button className="check-btn" onClick={() => setActive(i)} aria-pressed={active === i}>
                   <span className="num">{i + 1}</span>
                   <span className="check-txt"><span className="check-title">{c.title}</span><span className="check-text">{c.text}</span></span>
-                  <span className="side-tag">{c.side === "front" ? "Front" : "Back"}</span>
                 </button>
               </li>
             ))}

@@ -79,7 +79,7 @@ export const LAND: Record<string, [number, number][]> = {
 export const CONTACT = {
   phone: "01347561160",
   email: "info@aml.com.bd",
-  hours: "Mon to Fri, 8.30am to 5.30pm (BST)",
+  hours: "Sun-Thu, 9am to 6pm (BST)",
   entities: ["AmLion Toothpaste Mfg. Sdn Bhd", "AmLion Personal Care Mfg. Sdn Bhd", "AmLion Retail Connection Sdn Bhd"],
   address: ["House 60, Road 18, Block-J,", "Banani, Dhaka-1213"],
 };

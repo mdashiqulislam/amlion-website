@@ -9,12 +9,12 @@ const tel = CONTACT.phone.replace(/[^+\d]/g, "");
 const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(CONTACT.address.join(" "))}`;
 const COMPANY_TAGS = ["Oral care", "Personal care", "Retail"];
 
-/** Office hours are Mon to Fri, 8.30am to 5.30pm in Bangladesh (BST, UTC+6). */
+/** Office hours are Sun to Thu, 9am to 6pm in Bangladesh (BST, UTC+6). */
 function isOpenNow(d = new Date()) {
   const bst = new Date(d.getTime() + (d.getTimezoneOffset() + 360) * 60000);
   const day = bst.getDay();
   const mins = bst.getHours() * 60 + bst.getMinutes();
-  return day >= 1 && day <= 5 && mins >= 510 && mins < 1050;
+  return day >= 0 && day <= 4 && mins >= 540 && mins < 1080;
 }
 
 /** Live "Open now / Closed now" chip. Rendered after mount so the server and browser agree. */

@@ -48,7 +48,7 @@ export const POSTS: Post[] = [
     author: "AML Consumer Care Ltd",
     tags: ["Ziya", "Syawo", "Bangladesh", "Where to buy"],
     body: [
-      { t: "p", text: "Ziya and Syawo, the toothpaste and personal care brands made by AML Consumer Care Ltd, are now arriving in cosmetic shops and super shops across Bangladesh." },
+      { t: "p", text: "Ziya & Syawo Is the Oral Care and personal care brands made by Amlion Group are now arriving in cosmetic shops and super shops across Bangladesh with AML Consumer Care Ltd." },
       { t: "h2", text: "Where to find AML" },
       { t: "p", text: "AML is sold in cosmetic shops and super shops, not on this website. As stock reaches shelves, look for Ziya and Syawo packs at the shop you already use, and ask the shop owner if you cannot see them yet." },
       { t: "img", src: "/news/halal.webp", alt: "Syawo body wash, shower cream and perfume, and Ziya petroleum jelly, beside a green Halal mark", caption: "Ziya and Syawo packs, shown beside the Halal mark." },
@@ -57,15 +57,15 @@ export const POSTS: Post[] = [
       {
         t: "ul",
         items: [
-          "Ziya toothpaste, including Enamel Protect, Sensitive Instant Relief and Radiant Fresh",
+          "Ziya toothpaste, including Advanced Whitening, Sensitive Instant Relief, Radiant Fresh, Enamel Repair and Natural Clean",
           "Ziya oral sprays, including a children's flavour",
           "Ziya olive oil and petroleum jelly",
-          "Syawo body wash and shower cream",
-          "Syawo perfume mist cologne",
+          "Syawo Body Wash",
+          "Syawo Body Mist",
         ],
       },
-      { t: "h2", text: "Made in Dhaka" },
-      { t: "p", text: "Products sold in Bangladesh are made by AML Consumer Care Ltd in Dhaka, with the know-how of AML Group, which has made oral and personal care for more than 15 years. AML Group products are used in more than 30 countries, and Bangladesh is our newest market." },
+      { t: "h2", text: "Made in Malaysia" },
+      { t: "p", text: "Products sold in Bangladesh are made by Amlion Group in Malaysia, which has made oral and personal care for more than 32 years. Amlion Group products are used in more than 30 countries, and Bangladesh is our newest market." },
       {
         t: "callout",
         title: "Check your pack",

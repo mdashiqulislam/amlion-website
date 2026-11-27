@@ -146,8 +146,8 @@ export function Hero() {
             aria-label={`${i + 1} of ${SLIDES.length}`}
           >
             {/* Banners keep their whole artwork (their copy is part of it): a blurred copy fills any space around it. */}
-            {!s.copy && <Image className="hero3-backdrop" src={s.image} alt="" aria-hidden="true" fill sizes="(max-width: 720px) 100vw, 1352px" />}
-            <Image className="hero3-img" src={s.image} alt={s.alt} fill priority={i === 0} sizes="(max-width: 720px) 100vw, 1352px" />
+            {!s.copy && <Image className="hero3-backdrop" src={s.image} alt="" aria-hidden="true" fill quality={90} sizes="(max-width: 1080px) 100vw, calc(100vw - 88px)" />}
+            <Image className="hero3-img" src={s.image} alt={s.alt} fill priority={i === 0} quality={90} sizes="(max-width: 1080px) 100vw, calc(100vw - 88px)" />
             {s.copy && (
               <div className="hero3-copy">
                 <h1 className="hero3-title">

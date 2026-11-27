@@ -38,7 +38,7 @@ export const JOBS: Job[] = [
     mode: "Field-based",
     experience: "3+ years",
     /** NOT IN THE FEEDBACK: a market-based figure. Confirm the real range with AML HR before going live. */
-    salary: "BDT 30,000 to 45,000 per month",
+    salary: "Negotiable",
     education: "Bachelor's Degree",
     posted: "25 Nov 2026",
     deadline: "30 December 2026",

@@ -92,22 +92,16 @@ export const PRODUCTS: Product[] = [
 export type GenuineCheck = {
   title: string;
   text: string;
-  /** Which side of the pack shows it, and where the marker sits (percent of the pack image). */
-  side: "front" | "back";
-  x: number;
-  y: number;
-  /** Zoom centre when the marker sits beside the feature, and how large the lens draws the pack (px wide). */
-  zx?: number;
-  zy?: number;
-  zoom: number;
+  /** Where the marker sits (percent of the pack image). A check with no spot on the front image has no marker. */
+  spot?: { x: number; y: number; zoom: number };
 };
 
-/** Checks a shopper can do, matched to the Ziya Radiant Fresh pack images in /public/genuine. */
+/** Checks a shopper can do, matched to the front image of the Ziya Cooling Menthol Oral Spray in /public/genuine. */
 export const GENUINE_CHECKS: GenuineCheck[] = [
-  { title: "The brand name", text: "Every pack and tube carries our brand name in crisp, consistent colour, a mark of quality you can spot at a glance.", side: "front", x: 43.4, y: 19.9, zoom: 1500 },
-  { title: "The Halal mark", text: "Genuine packs carry the official HALAL mark by JAKIM on the front and back.", side: "back", x: 52.5, y: 20.5, zx: 47.1, zy: 14.7, zoom: 1750 },
-  { title: "Made by Amlion Malaysia", text: "Check that the label names Amlion Malaysia as the maker, made for AML Consumer Care Ltd.", side: "back", x: 25, y: 85, zx: 33, zy: 85.2, zoom: 1800 },
-  { title: "A clean, sealed pack", text: "Every tube is sealed flat with a clean cap, and every box arrives undamaged and neatly printed.", side: "front", x: 69.5, y: 90.5, zx: 69.5, zy: 91.6, zoom: 1500 },
+  { title: "The brand name", text: "Every pack and tube carries our brand name in crisp, consistent colour, a mark of quality you can spot at a glance.", spot: { x: 37.5, y: 17, zoom: 1500 } },
+  { title: "The Halal mark", text: "Genuine packs carry the official HALAL mark by JAKIM on the front and back.", spot: { x: 54, y: 87, zoom: 1800 } },
+  { title: "Made by Amlion Malaysia", text: "Check that the label names Amlion Malaysia as the maker, made for AML Consumer Care Ltd." },
+  { title: "A clean, sealed pack", text: "Every tube is sealed flat with a clean cap, and every box arrives undamaged and neatly printed.", spot: { x: 70.5, y: 37, zoom: 1500 } },
 ];
 
 export const BENEFITS = [

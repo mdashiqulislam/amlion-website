@@ -13,8 +13,8 @@ export function AboutHero() {
           <p className="career-lede">Part of AMLION Group Malaysia, AML Consumer Care Ltd. brings over 32 years of global oral and personal care expertise to Bangladesh, with <strong>HALAL-certified</strong> quality you can trust.</p>
         </div>
         <div className="career-photos" aria-hidden="true">
-          <figure className="cp a"><Image src="/factory/packing.webp" alt="" fill priority sizes="(max-width: 860px) 60vw, 300px" /></figure>
-          <figure className="cp b"><Image src="/factory/filling-line.webp" alt="" fill priority sizes="(max-width: 860px) 60vw, 300px" /></figure>
+          <figure className="cp a"><Image src="/factory/packing.webp" alt="" fill priority quality={90} sizes="(max-width: 900px) 70vw, 400px" /></figure>
+          <figure className="cp b"><Image src="/factory/filling-line.webp" alt="" fill priority quality={90} sizes="(max-width: 900px) 70vw, 400px" /></figure>
         </div>
       </div>
     </section>
@@ -95,7 +95,7 @@ function PeopleGrid({ people, id, title, lede, cols }: { people: Person[]; id: s
           {people.map((p, i) => (
             <li key={`${p.name}-${i}`} className="person">
               <div className={`person-photo${p.photo ? "" : " empty"}`}>
-                {p.photo ? <Image src={p.photo} alt={`${p.name}, ${p.role}`} fill sizes="(max-width: 560px) 50vw, 280px" /> : <Initials />}
+                {p.photo ? <Image src={p.photo} alt={`${p.name}, ${p.role}`} fill quality={90} sizes="(max-width: 900px) 50vw, 400px" /> : <Initials />}
               </div>
               <h3>{p.name}</h3>
               <p>{p.role}</p>
